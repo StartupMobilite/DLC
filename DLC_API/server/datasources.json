@@ -1,0 +1,20 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "postgre": {
+    "host": "ec2-79-125-120-89.eu-west-1.compute.amazonaws.com",
+    "port": 5432,
+    "url": "postgres://wkmpwmqvlhaosk:qyDYGZi9eXFfIL3TCzuOH82Z-z@ec2-79-125-120-89.eu-west-1.compute.amazonaws.com:5432/d7q1778d3eh2i0?ssl=true",
+    "database": "d7q1778d3eh2i0",
+    "password": "qyDYGZi9eXFfIL3TCzuOH82Z-z",
+    "name": "postgre",
+    "user": "wkmpwmqvlhaosk",
+    "connector": "postgresql"
+  },
+  "options": {
+    "name": "options",
+    "encrypt": true
+  }
+}
