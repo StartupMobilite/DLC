@@ -2,4 +2,18 @@
     <string name="app_name">Dlc</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">loginActivity</string>
+
+    <string name="mod_info">Modifier vos informations</string>
+    <string name="action_settings">Settings</string>
+    <string name="home_insc">INSCRIPTION</string>
+    <string name="home_txt">Creer un compte en tant que : </string>
+    <string name="home_btn_1">Consommateur</string>
+    <string name="home_btn_2">Distributeur</string>
+    <string name="name_edit_info">Nom de votre surface</string>
+    <string name="openinig_hour_edit_info">Horaire d\'ouverture</string>
+    <string name="closing_hour_edit_info">Horaire de fermeture</string>
+    <string name="address_edit_info">Adresse</string>
+    <string name="city_edit_info">Ville</string>
+    <string name="postal_code_edit_info">Code postal</string>
+    <string name="btn_submit_edit_info">Modifier</string>
 </resources>
