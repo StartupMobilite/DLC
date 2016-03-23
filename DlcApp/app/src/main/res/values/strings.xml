@@ -5,7 +5,7 @@
 
     <string name="mod_info">Modifier vos informations</string>
     <string name="home_insc">INSCRIPTION</string>
-    <string name="home_txt">Creer un compte en tant que : </string>
+    <string name="home_txt">Creer un compte en tant que: </string>
     <string name="home_btn_1">Consommateur</string>
     <string name="home_btn_2">Distributeur</string>
     <string name="name_edit_info">Nom de votre surface</string>
