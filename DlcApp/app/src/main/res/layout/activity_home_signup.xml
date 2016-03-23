@@ -11,7 +11,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.app.dlc.dlc.MainActivity"
-    android:background="@color/colorBgApp">
+    android:background="@drawable/fruitsoulegumes"
+    android:scaleType = "centerCrop">
 
     <FrameLayout
         android:layout_width="match_parent"
