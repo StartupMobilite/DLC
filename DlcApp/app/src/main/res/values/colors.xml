@@ -4,7 +4,9 @@
     <color name="colorPrimaryDark">#369f30</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="colorBgApp">#ffffff</color>
+    <color name="colorBgApp">#e19c0303</color>
 
-    <color name="colorHome">#e4e4e4</color>
+    <color name="colorHome">#e13fb547</color>
+
+    <color name="colorH1">#001a00</color>
 </resources>

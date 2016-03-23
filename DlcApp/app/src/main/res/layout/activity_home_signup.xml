@@ -32,7 +32,8 @@
             android:text="@string/home_insc"
             android:id="@+id/textView"
             android:layout_gravity="center_horizontal|top"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/colorH1"/>
 
         <TextView
             android:layout_width="236dp"
@@ -41,20 +42,21 @@
             android:id="@+id/textView2"
             android:layout_gravity="center"
             android:textSize="30sp"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/colorH1"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/home_btn_2"
-            android:id="@+id/button2"
+            android:text="@string/auth_btn"
+            android:id="@+id/auth_btnid"
             android:layout_gravity="left|bottom" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/home_btn_1"
-            android:id="@+id/button"
+            android:text="@string/signup_btn"
+            android:id="@+id/signup_btnid"
             android:layout_gravity="right|bottom"/>
     </FrameLayout>
 </RelativeLayout>

@@ -4,9 +4,9 @@
     <string name="title_activity_login">loginActivity</string>
 
     <string name="mod_info">Modifier vos informations</string>
-    <string name="home_insc">REJOIGNEZ-NOUS</string>
-    <string name="home_txt">Creer un compte en tant que: </string>
-    <string name="home_btn_1">Consommateur</string>
+    <string name="home_insc">L'application officielle</string>
+    <string name="home_txt">Bienvenue sur PAPLA </string>
+    <string name="home_btn_1">S\'inscrire</string>
     <string name="home_btn_2">Distributeur</string>
     <string name="name_edit_info">Nom de votre surface</string>
     <string name="openinig_hour_edit_info">Horaire d\'ouverture</string>
@@ -35,6 +35,6 @@
     <string name="signup_input_city">Ville</string>
     <string name="signup_input_postalcode">Code postal</string>
     <string name="signup_input_email">E-mail</string>
-    <string name="signup_btn">Créer votre compte</string>
+    <string name="signup_btn">Créer un compte</string>
     <string name="action_auth">Authentification</string>
 </resources>
