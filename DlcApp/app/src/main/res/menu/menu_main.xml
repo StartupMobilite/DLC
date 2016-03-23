@@ -3,9 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.app.dlc.dlc.MainActivity">
     <item
-        android:id="@+id/action_home_signup"
+        android:id="@+id/action_home"
         android:orderInCategory="1"
-        android:title="@string/action_home_signup"
+        android:title="@string/action_home"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_signup"
+        android:orderInCategory="1"
+        android:title="@string/action_signup"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_auth"

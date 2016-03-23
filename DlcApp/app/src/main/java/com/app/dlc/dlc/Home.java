@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class Home_signup extends AppCompatActivity {
+public class Home extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,14 +19,14 @@ public class Home_signup extends AppCompatActivity {
 
         btn_signup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(Home_signup.this, Signup_user.class);
-                Home_signup.this.startActivity(intent);
+                Intent intent = new Intent(Home.this, Signup_user.class);
+                Home.this.startActivity(intent);
             }
         });
         btn_auth.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(Home_signup.this, Authentication.class);
-                Home_signup.this.startActivity(intent);
+                Intent intent = new Intent(Home.this, Authentication.class);
+                Home.this.startActivity(intent);
             }
         });
     }
@@ -46,8 +46,12 @@ public class Home_signup extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_home_signup){
-            Intent intent = new Intent(this, Home_signup.class);
+        if (id == R.id.action_home){
+            Intent intent = new Intent(this, Home.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.action_signup){
+            Intent intent = new Intent(this, Signup_user.class);
             startActivity(intent);
         }
         else if (id == R.id.action_auth){

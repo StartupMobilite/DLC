@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
 import android.view.*;
-import android.content.Intent;
 
 public class Authentication extends AppCompatActivity {
 
@@ -43,8 +41,8 @@ public class Authentication extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_home_signup){
-            Intent intent = new Intent(this, Home_signup.class);
+        if (id == R.id.action_home){
+            Intent intent = new Intent(this, Home.class);
             startActivity(intent);
         }
         else if (id == R.id.action_auth){

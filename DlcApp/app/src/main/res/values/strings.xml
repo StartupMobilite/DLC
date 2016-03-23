@@ -4,8 +4,8 @@
     <string name="title_activity_login">loginActivity</string>
 
     <string name="mod_info">Modifier vos informations</string>
-    <string name="home_insc">L'application officielle</string>
-    <string name="home_txt">Bienvenue sur PAPLA </string>
+    <string name="home_insc">L\'application officielle</string>
+    <string name="home_txt">Bienvenue sur Planète panier </string>
     <string name="home_btn_1">S\'inscrire</string>
     <string name="home_btn_2">Distributeur</string>
     <string name="name_edit_info">Nom de votre surface</string>
@@ -15,7 +15,7 @@
     <string name="city_edit_info">Ville</string>
     <string name="postal_code_edit_info">Code postal</string>
     <string name="btn_submit_edit_info">Modifier</string>
-    <string name="action_home_signup">Inscription</string>
+    <string name="action_home">Accueil</string>
     <string name="search_1">Choisissez un mode de recherche</string>
     <string name="search_radio_1">Surface</string>
     <string name="search_radio_2">Produits</string>
@@ -37,4 +37,5 @@
     <string name="signup_input_email">E-mail</string>
     <string name="signup_btn">Créer un compte</string>
     <string name="action_auth">Authentification</string>
+    <string name="action_signup">Créer un compte</string>
 </resources>
