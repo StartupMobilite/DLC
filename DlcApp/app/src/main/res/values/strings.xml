@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Dlc</string>
+    <string name="app_name">PAPLA</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">loginActivity</string>
 
     <string name="mod_info">Modifier vos informations</string>
-    <string name="home_insc">INSCRIPTION</string>
+    <string name="home_insc">REJOIGNEZ-NOUS</string>
     <string name="home_txt">Creer un compte en tant que: </string>
     <string name="home_btn_1">Consommateur</string>
     <string name="home_btn_2">Distributeur</string>
@@ -15,4 +15,26 @@
     <string name="city_edit_info">Ville</string>
     <string name="postal_code_edit_info">Code postal</string>
     <string name="btn_submit_edit_info">Modifier</string>
+    <string name="action_home_signup">Inscription</string>
+    <string name="search_1">Choisissez un mode de recherche</string>
+    <string name="search_radio_1">Surface</string>
+    <string name="search_radio_2">Produits</string>
+    <string name="search_postalcode">Code Postal</string>
+    <string name="search_btn_1">Utiliser ma position actuelle</string>
+    <string name="search_btn_2">Utiliser mes positions préférées</string>
+    <string name="auth_radio_1">CONSOMMATEURS</string>
+    <string name="auth_radio_2">DISTRIBUTEUR</string>
+    <string name="auth_input_email">E-mail</string>
+    <string name="auth_input_pwd">Mot de Passe</string>
+    <string name="auth_btn">S\'IDENTIFIER</string>
+    <string name="signup_txt1">Vous êtes :</string>
+    <string name="signup_checkbox">New CheckBox</string>
+    <string name="signup_input_name">Nom</string>
+    <string name="signup_input_firstname">Prénom</string>
+    <string name="signup_input_address">Adresse</string>
+    <string name="signup_input_city">Ville</string>
+    <string name="signup_input_postalcode">Code postal</string>
+    <string name="signup_input_email">E-mail</string>
+    <string name="signup_btn">Créer votre compte</string>
+    <string name="action_auth">Authentification</string>
 </resources>

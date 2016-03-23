@@ -16,7 +16,8 @@
         </activity>
         <activity android:name=".Signup_user" />
         <activity android:name=".Distributeur_action" />
-        <activity android:name=".Authentication" >
+        <activity android:name=".Authentication" />
+        <activity android:name=".Home_signup" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
