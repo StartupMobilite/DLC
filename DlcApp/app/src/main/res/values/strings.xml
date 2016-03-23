@@ -4,7 +4,6 @@
     <string name="title_activity_login">loginActivity</string>
 
     <string name="mod_info">Modifier vos informations</string>
-    <string name="action_settings">Settings</string>
     <string name="home_insc">INSCRIPTION</string>
     <string name="home_txt">Creer un compte en tant que : </string>
     <string name="home_btn_1">Consommateur</string>
