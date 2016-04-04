@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3fb547</color>
-    <color name="colorPrimaryDark">#369f30</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#4CAF50</color>
+    <color name="colorPrimaryDark">#388E3C</color>
+    <color name="app_primary_dark">#45645C</color>
+    <color name="colorAccent">#45645C</color>
 
-    <color name="colorBgApp">#e19c0303</color>
+    <color name="colorBgApp">#ffffff</color>
+    <color name="grey_600">#757575</color>
+    <color name="grey_0">#ffffff</color> <!-- Grey 1000 (White) -->
+    <color name="grey_1000">#000000</color> <!-- Grey 1000 (Black) -->
 
-    <color name="colorHome">#e13fb547</color>
+    <color name="colorHome">#e4e4e4</color>
+    <color name="app_primary">#008080</color>
 
-    <color name="colorH1">#001a00</color>
+
+
+    <!--<color name="colorPrimary">#F50057</color>
+    <color name="colorPrimaryDark">#C51162</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="colorAccent">#FF80AB</color>-->
 </resources>

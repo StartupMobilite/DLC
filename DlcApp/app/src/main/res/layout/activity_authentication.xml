@@ -9,11 +9,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.app.dlc.dlc.Authentication">
 
-       <EditText
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONSOMMATEURS"
+            android:id="@+id/consommateursbuttom"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="34dp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DISTRIBUTEUR"
+            android:id="@+id/distributeurbuttom"
+            android:layout_gravity="right"
+            android:layout_alignTop="@+id/consommateursbuttom"
+            android:layout_toRightOf="@+id/consommateursbuttom"
+            android:layout_toEndOf="@+id/consommateursbuttom"
+            android:layout_marginLeft="36dp"
+            android:layout_marginStart="36dp" />
+
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:hint="@string/auth_input_email"
+            android:text="E-mail"
             android:textAlignment="center"
             android:textColor="#0000ff"
             android:ems="10"
@@ -27,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textVisiblePassword"
-            android:hint="@string/auth_input_pwd"
+            android:text="Mot de Passe"
             android:textAlignment="center"
             android:textColor="#0000ff"
             android:ems="10"
@@ -41,7 +65,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/auth_btn"
+            android:text="S'IDENTIFIER"
             android:id="@+id/btindentifier"
             android:background="@android:color/holo_orange_dark"
             android:layout_gravity="center_horizontal|bottom"

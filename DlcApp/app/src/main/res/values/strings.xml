@@ -1,12 +1,28 @@
 <resources>
-    <string name="app_name">PAPLA</string>
+    <string name="app_name">Dlc</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">loginActivity</string>
+    <string name="app_decription">Your awesome app</string>
+    <string name="already_registered">Already have an account? Sign in</string>
+    <string name="prompt_name">Name</string>
+    <string name="action_register">Register</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign In</string>
+    <string name="different_login">or</string>
+    <string name="plus_sign_out">Change Google+ account</string>
+    <string name="plus_disconnect">Disconnect from Google+</string>
+    <string name="error_invalid_email">Invalid Email</string>
+    <string name="error_invalid_password">The password is too short</string>
+    <string name="error_incorrect_password">Email or password incorrect</string>
+    <string name="error_field_required">Required</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="create_account">Register</string>
 
     <string name="mod_info">Modifier vos informations</string>
-    <string name="home_insc">L\'application officielle</string>
-    <string name="home_txt">Bienvenue sur Planète panier </string>
-    <string name="home_btn_1">S\'inscrire</string>
+    <string name="home_insc">INSCRIPTION</string>
+    <string name="home_txt">Creer un compte en tant que: </string>
+    <string name="home_btn_1">Consommateur</string>
     <string name="home_btn_2">Distributeur</string>
     <string name="name_edit_info">Nom de votre surface</string>
     <string name="openinig_hour_edit_info">Horaire d\'ouverture</string>
@@ -15,27 +31,55 @@
     <string name="city_edit_info">Ville</string>
     <string name="postal_code_edit_info">Code postal</string>
     <string name="btn_submit_edit_info">Modifier</string>
-    <string name="action_home">Accueil</string>
-    <string name="search_1">Choisissez un mode de recherche</string>
-    <string name="search_radio_1">Surface</string>
-    <string name="search_radio_2">Produits</string>
-    <string name="search_postalcode">Code Postal</string>
-    <string name="search_btn_1">Utiliser ma position actuelle</string>
-    <string name="search_btn_2">Utiliser mes positions préférées</string>
-    <string name="auth_radio_1">CONSOMMATEURS</string>
-    <string name="auth_radio_2">DISTRIBUTEUR</string>
-    <string name="auth_input_email">E-mail</string>
-    <string name="auth_input_pwd">Mot de Passe</string>
-    <string name="auth_btn">S\'IDENTIFIER</string>
-    <string name="signup_txt1">Vous êtes :</string>
-    <string name="signup_checkbox">New CheckBox</string>
-    <string name="signup_input_name">Nom</string>
-    <string name="signup_input_firstname">Prénom</string>
-    <string name="signup_input_address">Adresse</string>
-    <string name="signup_input_city">Ville</string>
-    <string name="signup_input_postalcode">Code postal</string>
-    <string name="signup_input_email">E-mail</string>
-    <string name="signup_btn">Créer un compte</string>
-    <string name="action_auth">Authentification</string>
-    <string name="action_signup">Créer un compte</string>
+    <string name="title_activity_create_account">create_account</string>
+
+
+    <!--<string name="app_name">Material Design</string>
+    <string name="action_settings">Settings</string>-->
+    <string name="action_search">Search</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="nav_item_produits">Produits</string>
+    <string name="nav_item_distributeurs">Distributeurs</string>
+    <string name="nav_item_preferences">Preferences</string>
+
+    <!-- navigation drawer pour les utilisateurs  -->
+    <string-array name="nav_drawer_utlisateur">
+        <item>@string/nav_item_produits</item>
+        <item>@string/nav_item_distributeurs</item>
+        <item>@string/nav_item_preferences</item>
+    </string-array>
+
+
+    <string name="nav_item_ajouter">Ajouter un produit</string>
+    <string name="nav_item_modifer">Mes produits</string>
+    <string name="nav_item_infos">Modifier mes informations</string>
+
+    <!-- navigation drawer pour les distributeurs  -->
+    <string-array name="nav_drawer_distributeur">
+        <item>@string/nav_item_ajouter</item>
+        <item>@string/nav_item_modifer</item>
+        <item>@string/nav_item_infos</item>
+    </string-array>
+
+
+    <string name="title_messages">Messages</string>
+    <string name="title_friends">Friends</string>
+    <string name="title_home">Home</string>
+    <string name="title_activity_signup">signup</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="hint_name">Full Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="err_msg_name">Enter your full name</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="err_msg_password">Enter the password</string>
+
+
 </resources>
