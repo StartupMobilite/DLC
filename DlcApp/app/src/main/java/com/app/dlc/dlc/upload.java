@@ -26,7 +26,7 @@ import java.util.Calendar;
 public class upload extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
     private static int RESULT_LOAD_IMG = 1;
     String imgDecodableString;
-    Button btn,btnDatePicker;
+    Button btn,btnDatePicker,btnTimePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class upload extends AppCompatActivity implements TimePickerDialog.OnTime
         setContentView(R.layout.activity_upload);
         btn =(Button)findViewById(R.id.btnconvert);
         btnDatePicker =(Button)findViewById(R.id.btnDatePicker);
+        btnTimePicker =(Button)findViewById(R.id.btnTimePicker);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +57,23 @@ public class upload extends AppCompatActivity implements TimePickerDialog.OnTime
         });
 
 
+        btnTimePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog tpd = TimePickerDialog.newInstance(
+                        upload.this,
+                        now.get(Calendar.HOUR_OF_DAY),
+                        now.get(Calendar.MINUTE),
+                        true
+                );
+
+                tpd.show(getFragmentManager(), "Timepickerdialog"); // necessaire pour afficher le picker
+            }
+        });
+
+
+
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -67,6 +85,7 @@ public class upload extends AppCompatActivity implements TimePickerDialog.OnTime
                         now.get(Calendar.DAY_OF_MONTH)
                 );
 
+                dpd.show(getFragmentManager(), "Datepickerdialog");// necessaire pour afficher le picker
 
             }
         });
@@ -119,11 +138,17 @@ public class upload extends AppCompatActivity implements TimePickerDialog.OnTime
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-
+        String date = "You picked the following date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+        Toast.makeText(this, date, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+        String hourString = hourOfDay < 10 ? "0"+hourOfDay : ""+hourOfDay;
+        String minuteString = minute < 10 ? "0"+minute : ""+minute;
+        String secondString = second < 10 ? "0"+second : ""+second;
+        String time = "You picked the following time: "+hourString+"h"+minuteString+"m"+secondString+"s";
+        Toast.makeText(this, time, Toast.LENGTH_LONG).show();
 
     }
 }

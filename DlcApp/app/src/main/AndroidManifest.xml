@@ -30,7 +30,9 @@
         <activity android:name=".activity.signup" >
 
         </activity>
-        <activity android:name=".activity.login" />
+        <activity android:name=".activity.login" >
+
+        </activity>
         <activity android:name=".upload" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
