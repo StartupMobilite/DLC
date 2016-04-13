@@ -22,11 +22,28 @@
                 layout="@layout/toolbar" />
         </LinearLayout>
 
+     <!--   <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1" >
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv"
+                android:id="@+id/spinner"
+                android:layout_gravity="center_horizontal" />
+
+        </FrameLayout>-->
+
+
         <FrameLayout
             android:id="@+id/container_body"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1" >
+
+        </FrameLayout>
 
 
     </LinearLayout>

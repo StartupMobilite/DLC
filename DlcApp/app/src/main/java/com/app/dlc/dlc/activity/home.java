@@ -10,6 +10,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,9 @@ import com.app.dlc.dlc.fragment.utilisateur.Fragment_Preference;
 import com.app.dlc.dlc.fragment.utilisateur.Fragment_ProduitsList;
 import com.app.dlc.dlc.model.LoggedInUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class home extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
     private Toolbar mToolbar;
@@ -36,52 +42,51 @@ public class home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
-        Bundle bundle = getIntent().getExtras();
-        String token = bundle.getString("token");
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar); // reference de la toolbar definit dans le layout de l activite
 
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setSupportActionBar(mToolbar); // "active le support de la toolbar qui n est rien d autre que l action bar
+        getSupportActionBar().setDisplayShowHomeEnabled(true); //definition du bouton a l extreme gauche de l action bar
+
+        //reference du drawer (menu de gauche) et l assigne a la toolbar
         drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
         drawerFragment.setDrawerListener(this);
 
         if(LoggedInUser.type.equals("utilisateur"))
         {
+            // si c est un utlisateur utliser le fragment qui lui est dedie
             Fragment_ProduitsList fragment = null;
             fragment = new Fragment_ProduitsList();
-            Bundle b = new Bundle();
+            /*Bundle b = new Bundle();
             b.putString("token", token);
-            fragment.setArguments(b);
+            fragment.setArguments(b);*/
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment);
+            //fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
         else {
+
+            // sinon utliser le fragment dedie au distributeur
             Fragment_MesProduits fragment = null;
             fragment = new Fragment_MesProduits();
-            Bundle b = new Bundle();
+            /*Bundle b = new Bundle();
             b.putString("token", token);
-            fragment.setArguments(b);
+            fragment.setArguments(b);*/
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
-
-
-
-        //fragment.setTextViewText(token);
-        //textView.setText(token);
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -105,12 +110,19 @@ public class home extends AppCompatActivity implements FragmentDrawer.FragmentDr
     }
 
     @Override
+    // evenement qui se declenche lorsque l on clique sur le drawer
     public void onDrawerItemSelected(View view, int position) {
+
         displayView(position);
     }
+
+
+
     private void displayView(int position) {
         Fragment fragment = null;
         String title = getString(R.string.app_name);
+
+        // definit le fragment a instancier et a afficher dans le container_body du layout de l activite home
         if(LoggedInUser.getType().equals("utilisateur"))
         {
             switch (position) {
@@ -130,7 +142,7 @@ public class home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                     break;
             }
         }
-        else{
+        else{ // si c est un distributeur
             switch (position) {
                 case 0:
                     fragment = new Fragment_AjouterUnProduit();
@@ -152,11 +164,15 @@ public class home extends AppCompatActivity implements FragmentDrawer.FragmentDr
 
 
         if (fragment != null) {
+
+            //syntaxe pour afficher un fragment dans la zone specifee en lmoccurence container_body
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-            // set the toolbar title
+            //definit le titre a afficher dans l action bar
+
             getSupportActionBar().setTitle(title);
         }
     }

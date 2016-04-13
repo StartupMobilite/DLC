@@ -6,9 +6,13 @@ package com.app.dlc.dlc.model;
 public class Produit {
     private String nom;
     private double prixFinal;
+    private double prixInitial;
     private String dlc;
     private String quantite;
     private String categorie;
+    private String image;
+    private String idDistributeur;
+
 
 
     public String getNom() {
@@ -49,5 +53,27 @@ public class Produit {
 
     public void setCategorie(String categorie) {
         this.categorie = categorie;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    public double getPrixInitial() {
+        return prixInitial;
+    }
+
+    public void setPrixInitial(double prixInitial) {
+        this.prixInitial = prixInitial;
+    }
+    public String getIdDistributeur() {
+        return idDistributeur;
+    }
+
+    public void setIdDistributeur(String idDistributeur) {
+        this.idDistributeur = idDistributeur;
     }
 }

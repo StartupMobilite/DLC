@@ -38,10 +38,10 @@ public class signup extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentUtilisateur(), "Utilisateur");
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager()); //active le support des fragments pour le view pager
+        adapter.addFragment(new FragmentUtilisateur(), "Utilisateur"); //
         adapter.addFragment(new Fragment_DistributeurList(), "Distributeur");
-        viewPager.setAdapter(adapter);
+        viewPager.setAdapter(adapter); //ajout de l adapter contenant les deux fragments au viewpager
     }
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

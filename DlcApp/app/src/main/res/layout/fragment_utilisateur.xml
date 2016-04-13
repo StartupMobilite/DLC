@@ -67,7 +67,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Pas encore de compte? Creez-en un"
+            android:text="Deja membre ? Identifiez-vous"
             android:gravity="center"
             android:textSize="16dip"/>
 

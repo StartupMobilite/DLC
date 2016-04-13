@@ -46,7 +46,8 @@ public class FragmentDrawer extends Fragment {
         List<NavDrawerItem> data = new ArrayList<>();
 
 
-        // preparing navigation drawer items
+
+        //ajout des items du drawer definit dans string.xml
         for (int i = 0; i < titles.length; i++) {
             NavDrawerItem navItem = new NavDrawerItem();
             navItem.setTitle(titles[i]);
@@ -59,7 +60,7 @@ public class FragmentDrawer extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // drawer labels
+        // charge un menu en fonction de celui qui sest authentifie
         if (LoggedInUser.getType().equals("distributeur"))
             titles = getActivity().getResources().getStringArray(R.array.nav_drawer_distributeur);
         else
@@ -70,12 +71,18 @@ public class FragmentDrawer extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflating view layout
+        // definit le layout du drawer
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+
+        // definit le container ou doit s afficher le contenu
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
 
+        //definit une instacne du navigation drawer a passatn les deux parametres attendus dans le constructeur a savoir
+        // le context (une activite est un context) et le getdata qui contient la liste de type NavDrawerItem voir la fonction getdata
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
         recyclerView.setAdapter(adapter);
+
+        // definit le type de layout pour le recyclerview en l occurence un linear layout
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
@@ -101,7 +108,7 @@ public class FragmentDrawer extends Fragment {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getActivity().invalidateOptionsMenu();
+                getActivity().invalidateOptionsMenu(); // quand le menu apparait masquer l icone pouir le faire apparaitre
             }
 
             @Override

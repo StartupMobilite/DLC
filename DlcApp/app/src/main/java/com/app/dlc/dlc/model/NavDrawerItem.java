@@ -3,6 +3,8 @@ package com.app.dlc.dlc.model;
 /**
  * Created by Guillaume on 31/03/2016.
  */
+
+// cette classe identifie chaque element du drawer
 public class NavDrawerItem {
     private boolean showNotify;
     private String title;

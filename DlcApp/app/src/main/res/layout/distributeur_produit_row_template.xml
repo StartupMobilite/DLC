@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -11,6 +12,7 @@
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="6dp">
 
+
     <RelativeLayout
 
         android:layout_width="match_parent"
@@ -19,8 +21,8 @@
 
         <ImageView
             android:src="@drawable/placeholder"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="150dp"
+            android:layout_height="170dp"
             android:scaleType="centerCrop"
             android:id="@+id/thumbnail"/>
 
@@ -75,6 +77,25 @@
             android:id="@+id/tv_categorie"
             android:layout_below="@+id/tv_prixfinal"
             android:layout_toEndOf="@+id/thumbnail" />
+        <ImageView
+            android:id="@+id/image_action_like1"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:padding="10dp"
+            android:layout_toEndOf="@+id/tv_nom"
+
+            android:layout_toRightOf="@+id/tv_nom"
+            android:src="@drawable/ic_action_action_favorite" />
+
+        <ImageView
+            android:id="@+id/image_action_flag"
+            android:layout_width="10dip"
+            android:layout_height="50dip"
+            android:padding="10dp"
+            android:layout_toEndOf="@+id/thumbnail"
+            android:layout_below="@id/tv_categorie"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_action_action_turned_in" />
         <TextView
             android:paddingLeft="10dp"
             android:layout_width="wrap_content"
@@ -87,5 +108,40 @@
 
 
     </RelativeLayout>
+       <!-- <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dip"
+            android:layout_weight="1.4"
+            android:gravity="center|right"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_id"
+                android:visibility="invisible"
+                />
+
+            <ImageView
+                android:id="@+id/image_action_like"
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:padding="8dp"
+                android:src="@drawable/ic_action_action_favorite" />
+
+            <ImageView
+                android:id="@+id/image_action_flag"
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:padding="8dp"
+                android:src="@drawable/ic_action_action_turned_in" />
+
+            <ImageView
+                android:id="@+id/image_action_share"
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:padding="8dp"
+                android:src="@drawable/ic_action_social_share" />
+        </LinearLayout>-->
+
 
 </android.support.v7.widget.CardView>

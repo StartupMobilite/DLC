@@ -31,6 +31,8 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        //defininit le layout correspondant a chaque element du menu
         View view = inflater.inflate(R.layout.nav_drawer_row, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
@@ -47,11 +49,17 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         return data.size();
     }
 
+
+    //cette classe definit le contenu de chaque element de du drawer
+    //chaque element du drawer est en fait un rcyclerview
+    // le layout ocrrespondant et nav_drawer_row (voir la fonction onCreateViewHolder)
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView title;
 
         public MyViewHolder(View itemView) {
             super(itemView);
+
+            //expose le controle qui a l id title de facon a ce qu il puisse etre modifie dynamiquement
             title = (TextView) itemView.findViewById(R.id.title);
         }
     }
