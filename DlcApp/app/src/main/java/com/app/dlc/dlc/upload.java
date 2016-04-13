@@ -16,18 +16,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
-public class upload extends AppCompatActivity {
+import java.io.ByteArrayOutputStream;
+import java.util.Calendar;
+
+public class upload extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
     private static int RESULT_LOAD_IMG = 1;
     String imgDecodableString;
-    Button btn;
+    Button btn,btnDatePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
         btn =(Button)findViewById(R.id.btnconvert);
+        btnDatePicker =(Button)findViewById(R.id.btnDatePicker);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +51,22 @@ public class upload extends AppCompatActivity {
                 String b =Base64.encodeToString(bitmapdata, Base64.NO_WRAP);
                 tv.setText(b);
                 Toast.makeText(getApplicationContext(),Integer.toString(bitmapdata.length) , Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+
+        btnDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Calendar now = Calendar.getInstance();
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        upload.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+
 
             }
         });
@@ -95,4 +117,13 @@ public class upload extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
+    }
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+
+    }
 }

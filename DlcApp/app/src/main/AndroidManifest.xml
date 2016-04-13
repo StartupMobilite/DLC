@@ -27,15 +27,17 @@
             android:name=".create_account"
             android:label="@string/title_activity_create_account" />
         <activity android:name=".activity.home" />
-        <activity android:name=".activity.signup" />
-        <activity android:name=".activity.login" >
+        <activity android:name=".activity.signup" >
+
+        </activity>
+        <activity android:name=".activity.login" />
+        <activity android:name=".upload" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".upload" />
         <activity android:name=".download" />
         <activity android:name=".expandableview" />
         <activity

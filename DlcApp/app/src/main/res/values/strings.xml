@@ -89,6 +89,9 @@
     <string name="checkin">Checkin</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="hint_voie">Nom et/ou numéro de voie</string>
+    <string name="hint_ville">Ville</string>
+    <string name="hint_zip">Code postal</string>
 
 
 </resources>
