@@ -12,6 +12,7 @@ public class Produit {
     private String categorie;
     private String image;
     private String idDistributeur;
+    public String id;
 
 
 
@@ -75,5 +76,12 @@ public class Produit {
 
     public void setIdDistributeur(String idDistributeur) {
         this.idDistributeur = idDistributeur;
+    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

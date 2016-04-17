@@ -30,6 +30,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Text -->
+    <style name="Body2.White.Primary" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:textColor">@color/text_white_text_icons_100</item>
+    </style>
+
+    <style name="Body1.White.Primary" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/text_white_text_icons_100</item>
+    </style>
+
     <style name="MyMaterialTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="MyMaterialTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

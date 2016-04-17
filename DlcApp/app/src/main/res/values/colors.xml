@@ -12,6 +12,9 @@
 
     <color name="colorHome">#e4e4e4</color>
     <color name="app_primary">#008080</color>
+    <color name="black_alpha_50">#80000000</color>
+    <color name="text_white_text_icons_100">#FFFFFF</color>
+
 
 
 

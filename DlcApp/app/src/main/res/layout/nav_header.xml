@@ -1,0 +1,68 @@
+<android.support.percent.PercentRelativeLayout android:id="@+id/navigation_drawer_account_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?selectableItemBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:foreground="@color/black_alpha_50"
+        app:layout_aspectRatio="178%"
+        app:layout_widthPercent="100%">
+
+        <ImageView
+            android:id="@+id/navigation_drawer_user_account_picture_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/image_nav_drawer_account_background"
+            tools:ignore="ContentDescription" />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/navigation_drawer_account_section"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingStart="16dp"
+        app:layout_aspectRatio="178%"
+        app:layout_widthPercent="100%">
+
+        <LinearLayout
+            android:id="@+id/navigation_drawer_account_information"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/navigation_drawer_account_information_display_name"
+                style="@style/Body2.White.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Test" />
+
+            <TextView
+                android:id="@+id/navigation_drawer_account_information_email"
+                style="@style/Body1.White.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test@gmail.com" />
+
+        </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/navigation_drawer_user_account_picture_profile"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_above="@id/navigation_drawer_account_information"
+            android:src="@drawable/ic_account_circle_64dp" />
+
+    </RelativeLayout>
+
+</android.support.percent.PercentRelativeLayout>

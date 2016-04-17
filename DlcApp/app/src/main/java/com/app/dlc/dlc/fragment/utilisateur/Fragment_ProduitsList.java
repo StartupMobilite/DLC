@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -55,6 +56,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -72,7 +75,8 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
     Spinner spinner;
     TextView tv;
     ArrayAdapter<String> dataAdapter;
-
+    FloatingActionButton fab;
+    Hashtable categorieTable;
 
 
     public Fragment_ProduitsList() {
@@ -104,7 +108,6 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
 
         // Spinner Drop down elements
 
-
         dataAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, categories);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -114,26 +117,19 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
                 String item = parent.getItemAtPosition(position).toString();
                 //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
                 List<Produit> filteredProduitList;
-                if(item.equals("Tout")){
+                if (item.equals("Tout")) {
                     adapter = new ProduitRecycleViewAdapter(getActivity(), produitList);
                     mRecyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                     tv.setVisibility(View.VISIBLE);
                     spinner.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    for (Categorie categorie : categorieList) {
-                        if(categorie.getNom()==item){
-                            filteredProduitList=filterByCategory(produitList,categorie.getId());
-                            adapter = new ProduitRecycleViewAdapter(getActivity(), filteredProduitList);
-                            mRecyclerView.setAdapter(adapter);
-                            tv.setVisibility(View.VISIBLE);
-                            spinner.setVisibility(View.VISIBLE);
-                            adapter.notifyDataSetChanged();
-                            break;
-                        }
-                    }
+                } else {
+                    filteredProduitList = filterByCategory(produitList, item);
+                    adapter = new ProduitRecycleViewAdapter(getActivity(), filteredProduitList);
+                    mRecyclerView.setAdapter(adapter);
+                    tv.setVisibility(View.VISIBLE);
+                    spinner.setVisibility(View.VISIBLE);
+                    adapter.notifyDataSetChanged();
                 }
 
             }
@@ -145,37 +141,43 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
         });
 
         //textView=(TextView)rootView.findViewById(R.id.detail);
-        mRecyclerView = (RecyclerView)rootView.findViewById(R.id.recycler_view);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         Bundle bundle = this.getArguments();
-        if (bundle != null)
-        {
+        if (bundle != null) {
             int id = bundle.getInt("id", -1);
 
-            if(id == -1){
+            if (id == -1) {
                 url = "https://dlcapi.herokuapp.com/api/Produits";
+                fab.setVisibility(View.INVISIBLE);
+            } else {
+                url = "https://dlcapi.herokuapp.com/api/Produits?filter[where][iddistributeur]=" + id;
+                fab.setVisibility(View.VISIBLE);
             }
-            else
-            {
-                url = "https://dlcapi.herokuapp.com/api/Produits?filter[where][iddistributeur]="+id;
-            }
-        }
-        else {
+        } else {
             url = "https://dlcapi.herokuapp.com/api/Produits";
 
         }
+        //fab.setVisibility(View.INVISIBLE);
+        /*fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // FAB Action goes here
+                Toast.makeText(getActivity(),"Test",Toast.LENGTH_LONG);
 
-
+            }
+        });*/
 
         new AsyncHttpTask().execute(url);
         return rootView;
     }
 
-    private List<Produit> filterByCategory(List<Produit> produitList, int categorieId) {
-        List<Produit> filteredList =new ArrayList<Produit>();
+    private List<Produit> filterByCategory(List<Produit> produitList, String categorie) {
+        List<Produit> filteredList = new ArrayList<Produit>();
         for (Produit produit : produitList) {
-            if (produit.getCategorie().equals(Integer.toString(categorieId))) {
+            if (produit.getCategorie().equals(categorie)) {
                 filteredList.add(produit);
             }
         }
@@ -193,13 +195,13 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
         super.onDetach();
     }
 
-    @Override
+/*    @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
     {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-    }
+    }*/
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -240,12 +242,11 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        if(newText.isEmpty()){
+        if (newText.isEmpty()) {
             tv.setVisibility(View.VISIBLE);
             spinner.setVisibility(View.VISIBLE);
-        }
-        else {
-            List<Produit> filteredProduitList = filterByName(produitList,newText);
+        } else {
+            List<Produit> filteredProduitList = filterByName(produitList, newText);
             adapter = new ProduitRecycleViewAdapter(getActivity(), filteredProduitList);
             mRecyclerView.setAdapter(adapter);
             tv.setVisibility(View.INVISIBLE);
@@ -254,15 +255,12 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
         }
 
 
-
         return false;
     }
 
     private List<Produit> filterByName(List<Produit> produitList, String query) {
-        List<Produit> filteredList =new ArrayList<Produit>();
+        List<Produit> filteredList = new ArrayList<Produit>();
         for (Produit produit : produitList) {
-            /*String s =produit.getNom();
-            boolean b = s.contains(query);*/
             if (produit.getNom().toLowerCase().startsWith(query)) {
                 filteredList.add(produit);
             }
@@ -283,20 +281,38 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
             InputStream inputStream = null;
             Integer result = 0;
             HttpURLConnection urlConnection = null;
+            URL url;
 
             try {
                 /* forming th java.net.URL object */
-                URL url = new URL(params[0]);
+
+                url = new URL("https://dlcapi.herokuapp.com/api/Categories?access_token=" + LoggedInUser.getToken());
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                int statusCode = urlConnection.getResponseCode();
+                if (statusCode == 200) {
+
+                    BufferedReader r = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = r.readLine()) != null) {
+                        response.append(line);
+                    }
+                    fillCategorieHashMap(response.toString());
+                }
+
+
+                url = new URL(params[0]);
 
                 urlConnection = (HttpURLConnection) url.openConnection();
 
                 /* for Get request */
                 urlConnection.setRequestMethod("GET");
 
-                int statusCode = urlConnection.getResponseCode();
+                statusCode = urlConnection.getResponseCode();
 
                 /* 200 represents HTTP OK */
-                if (statusCode ==  200) {
+                if (statusCode == 200) {
 
                     BufferedReader r = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                     StringBuilder response = new StringBuilder();
@@ -307,23 +323,7 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
 
                     parseResult(response.toString());
                     result = 1; // Successful
-                    url = new URL("https://dlcapi.herokuapp.com/api/Categories?access_token="+ LoggedInUser.getToken());
-
-                    urlConnection = (HttpURLConnection) url.openConnection();
-
-                    urlConnection.setRequestMethod("GET");
-
-                    statusCode = urlConnection.getResponseCode();
-                    if(statusCode ==200){
-                        r = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                        response = new StringBuilder();
-                        while ((line = r.readLine()) != null) {
-                            response.append(line);
-                        }
-                        parseCategories(response.toString());
-                    }
-
-                }else{
+                } else {
                     result = 0; //"Failed to fetch data!";
                 }
 
@@ -355,61 +355,55 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
                 JSONArray response = new JSONArray(result);
                 if (null == produitList) {
                     produitList = new ArrayList<Produit>();
-                }
-                else{
+                } else {
                     produitList.clear();
                 }
+                dataAdapter.clear();
+                dataAdapter.add("Tout");
 
-                for(int i =0;i<response.length();i++)
-                {
+                for (int i = 0; i < response.length(); i++) {
                     JSONObject object = response.getJSONObject(i);
                     Produit produit = new Produit();
                     produit.setNom(object.getString("nom"));
-                    produit.setCategorie(object.getString("categorie"));
-                    categorieList.add(new Categorie(Integer.parseInt(object.getString("categorie"))));
+                    produit.setCategorie(categorieTable.get(object.getString("categorie")).toString());
+                    if (dataAdapter.getPosition(produit.getCategorie()) == -1) {
+                        dataAdapter.add(produit.getCategorie());
+                    }
                     produit.setDlc(object.getString("dlc"));
                     produit.setQuantite(object.getString("quantite"));
                     produit.setPrixFinal(Double.parseDouble(object.getString("prixfinal")));
                     produit.setPrixInitial(Double.parseDouble(object.getString("prixinitial")));
                     produit.setIdDistributeur(object.getString("iddistributeur"));
-                    if(!object.getString("image").isEmpty())
+                    if (!object.getString("image").isEmpty())
                         produit.setImage(object.getString("image"));
                     produitList.add(produit);
                 }
 
 
-            /*Initialize array if null*/
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
-        private void parseCategories(String result) {
-            dataAdapter.clear();
-            dataAdapter.add("Tout");
+
+        private void fillCategorieHashMap(String result) {
             try {
                 JSONArray response = new JSONArray(result);
+                categorieTable = new Hashtable();
 
-
-                for(int i =0;i<response.length();i++)
-                {
+                for (int i = 0; i < response.length(); i++) {
                     JSONObject object = response.getJSONObject(i);
-                    for (Categorie categorie : categorieList) {
-                        if(categorie.getId()==Integer.parseInt(object.getString("idcategorie"))){
-                            categorie.setNom(object.getString("nom"));
-                            dataAdapter.add(categorie.getNom());
-                            break;
-                        }
-                    }
+
+                    categorieTable.put(object.getString("idcategorie"), object.getString("nom"));
+
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
         }
     }
-
 
 
     public class ProduitRecycleViewAdapter extends RecyclerView.Adapter<ProduitRowTemplate> {
@@ -429,8 +423,8 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
         public ProduitRowTemplate onCreateViewHolder(ViewGroup parent, int viewType) {
 
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.produitrowtemplate, null);
-            cardView=(CardView)parent.findViewById(R.id.card_view);
-            final TextView t = (TextView)parent.findViewById(R.id.tv_nom);
+            cardView = (CardView) parent.findViewById(R.id.card_view);
+            final TextView t = (TextView) parent.findViewById(R.id.tv_nom);
             ProduitRowTemplate produitRowTemplate = new ProduitRowTemplate(v);
 
             parent.setOnClickListener(new View.OnClickListener() {
@@ -438,7 +432,7 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
                 @Override
                 public void onClick(View v) {
                     int pos = mRecyclerView.getChildAdapterPosition(v);
-                    if (pos >= 0 && pos < getItemCount()){
+                    if (pos >= 0 && pos < getItemCount()) {
                         Toast.makeText(getActivity(), "pppppp", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "Element clicked.");
                     }
@@ -458,16 +452,14 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
             produitRowTemplate.tv_quantite.setText(produit.getQuantite());
             produitRowTemplate.tv_dlc.setText(produit.getDlc());
             produitRowTemplate.tv_categorie.setText(produit.getCategorie());
-            produitRowTemplate.idDistributeur=produit.getIdDistributeur();
-            if(!produit.getImage().equals("null")) {
+            produitRowTemplate.idDistributeur = produit.getIdDistributeur();
+            if (!produit.getImage().equals("null")) {
                 byte[] imageAsBytes = Base64.decode(produit.getImage().getBytes(), Base64.DEFAULT);
                 //Bitmap b = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
                 //profileImage.setImageBitmap(Bitmap.createScaledBitmap(b, 120, 120, false));
                 //produitRowTemplate.thumbnail.setImageBitmap(Bitmap.createScaledBitmap(b, 400, 400, false));
                 produitRowTemplate.thumbnail.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
-            }
-            else
-            {
+            } else {
                 produitRowTemplate.thumbnail.setImageResource(R.drawable.placeholder);
             }
 
@@ -475,7 +467,8 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
 
         @Override
         public int getItemCount() {
-            return (null != produitList ? produitList.size() : 0);    }
+            return (null != produitList ? produitList.size() : 0);
+        }
     }
 
     public class ProduitRowTemplate extends RecyclerView.ViewHolder {
@@ -539,7 +532,6 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
         }
 
     }
-
 
 
 }

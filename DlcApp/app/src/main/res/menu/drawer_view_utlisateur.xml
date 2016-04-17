@@ -1,0 +1,44 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <group android:checkableBehavior="single">
+
+        <item
+
+            android:id="@+id/nav_liste_de_produits"
+
+            android:icon="@drawable/ic_forum"
+            android:checked="true"
+
+            android:title="Produits" />
+
+        <item
+
+            android:id="@+id/nav_liste_des_distributeurs"
+
+            android:icon="@drawable/ic_event"
+
+            android:title="Distributeurs" />
+
+
+        <item android:title="Mon compte">
+
+            <menu>
+
+                <item
+                    android:id="@+id/nav_deconnexion"
+
+                    android:icon="@drawable/ic_dashboard"
+
+                    android:title="Se deconnecter" />
+
+
+            </menu>
+
+        </item>
+
+
+    </group>
+
+</menu>

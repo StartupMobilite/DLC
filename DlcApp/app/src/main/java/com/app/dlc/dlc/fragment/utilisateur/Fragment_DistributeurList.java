@@ -10,12 +10,18 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Base64;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -43,7 +49,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Fragment_DistributeurList extends Fragment {
+public class Fragment_DistributeurList extends Fragment implements SearchView.OnQueryTextListener {
     private ProgressDialog dialog;
     private static final String TAG = "RecyclerViewExample";
     private List<Distributeur> distributeurList = new ArrayList<Distributeur>();
@@ -57,6 +63,8 @@ public class Fragment_DistributeurList extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);//Make sure you have this line of code.
+
     }
 
     @Override
@@ -76,6 +84,8 @@ public class Fragment_DistributeurList extends Fragment {
         mRecyclerView = (RecyclerView)rootView.findViewById(R.id.recycler_view);
         // definiton du type d affichage des elements du recycleview
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        registerForContextMenu(rootView);
+
 
         final String url = "https://dlcapi.herokuapp.com/api/distributeurs?access_token="+ LoggedInUser.token;
         new AsyncHttpTask().execute(url);
@@ -182,6 +192,77 @@ public class Fragment_DistributeurList extends Fragment {
     }
 
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //inflater.inflate(R.menu.menu_main, menu);
+        getActivity().getMenuInflater().inflate(R.menu.menu_main, menu);
+        //inflater.inflate(R.menu.menu_main, menu);
+
+        final MenuItem item = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(this);
+
+        MenuItemCompat.setOnActionExpandListener(item,
+                new MenuItemCompat.OnActionExpandListener() {
+                    @Override
+                    public boolean onMenuItemActionCollapse(MenuItem item) {
+                        // Do something when collapsed
+                        adapter = new DistributeurRecycleViewAdapter(getActivity(), distributeurList);
+                        mRecyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                        //notifyDataSetChanged();
+
+                        return true; // Return true to collapse action view
+                    }
+
+                    @Override
+                    public boolean onMenuItemActionExpand(MenuItem item) {
+                        // Do something when expanded
+                        return true; // Return true to expand action view
+                    }
+                });
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+            List<Distributeur> filteredDistributeurList = filterByName(distributeurList,newText);
+            adapter = new DistributeurRecycleViewAdapter(getActivity(), filteredDistributeurList);
+            mRecyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
+        return false;
+    }
+
+
+    private List<Distributeur> filterByName(List<Distributeur> distributeurList, String query) {
+        List<Distributeur> filteredList =new ArrayList<Distributeur>();
+        for (Distributeur distributeur : distributeurList) {
+            /*String s =produit.getNom();
+            boolean b = s.contains(query);*/
+            if (distributeur.getNom().toLowerCase().startsWith(query)) {
+                filteredList.add(distributeur);
+            }
+        }
+        return filteredList;
+
+    }
+
+
+
 
     public class DistributeurRecycleViewAdapter extends RecyclerView.Adapter<DistributeurRowTemplate> {
         private List<Distributeur> distributeurList;
@@ -256,7 +337,7 @@ public class Fragment_DistributeurList extends Fragment {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
-                    Toast.makeText(itemView.getContext(), Integer.toString(tv_id.getId()), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(itemView.getContext(), Integer.toString(tv_id.getId()), Toast.LENGTH_SHORT).show();
                     //startActivity(new Intent(itemView.getContext(), signup.class));
                     Fragment_ProduitsList fragment = null;
                     fragment = new Fragment_ProduitsList();

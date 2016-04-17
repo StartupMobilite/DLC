@@ -1,9 +1,13 @@
 package com.app.dlc.dlc.activity;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -31,11 +35,14 @@ import com.app.dlc.dlc.model.LoggedInUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class home extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
+public class home extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
     private TextView ed;
+    private DrawerLayout mDrawer;
+    private NavigationView nvDrawer;
+    private ActionBarDrawerToggle drawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +53,39 @@ public class home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         mToolbar = (Toolbar) findViewById(R.id.toolbar); // reference de la toolbar definit dans le layout de l activite
 
         setSupportActionBar(mToolbar); // "active le support de la toolbar qui n est rien d autre que l action bar
-        getSupportActionBar().setDisplayShowHomeEnabled(true); //definition du bouton a l extreme gauche de l action bar
+        //getSupportActionBar().setDisplayShowHomeEnabled(true); //definition du bouton a l extreme gauche de l action bar
+
+        //reference du drawer layout
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        //reference du navigation view
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+
+        // Setup drawer view
+        if(LoggedInUser.type.equals("utilisateur")){
+            nvDrawer.inflateMenu(R.menu.drawer_view_utlisateur);
+        }
+        else{
+            nvDrawer.inflateMenu(R.menu.drawer_view_distributeur);
+        }
+
+
+        setupDrawerContent(nvDrawer);
+
+        drawerToggle = setupDrawerToggle();
+
+
+
+        // Tie DrawerLayout events to the ActionBarToggle
+
+        mDrawer.addDrawerListener(drawerToggle);
+
+
 
         //reference du drawer (menu de gauche) et l assigne a la toolbar
-        drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        /*drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
-        drawerFragment.setDrawerListener(this);
+        drawerFragment.setDrawerListener(this);*/
 
         if(LoggedInUser.type.equals("utilisateur"))
         {
@@ -83,6 +117,32 @@ public class home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         }
     }
 
+    private ActionBarDrawerToggle setupDrawerToggle() {
+
+        return new ActionBarDrawerToggle(this, mDrawer, mToolbar, R.string.drawer_open,  R.string.drawer_close);
+
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+
+        navigationView.setNavigationItemSelectedListener(
+
+                new NavigationView.OnNavigationItemSelectedListener() {
+
+                    @Override
+
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                        selectDrawerItem(menuItem);
+
+                        return true;
+
+                    }
+
+                });
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -109,13 +169,13 @@ public class home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
+ /*   @Override
     // evenement qui se declenche lorsque l on clique sur le drawer
     public void onDrawerItemSelected(View view, int position) {
 
         displayView(position);
     }
-
+*/
 
 
     private void displayView(int position) {
@@ -176,4 +236,128 @@ public class home extends AppCompatActivity implements FragmentDrawer.FragmentDr
             getSupportActionBar().setTitle(title);
         }
     }
+
+    @Override
+
+    protected void onPostCreate(Bundle savedInstanceState) {
+
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+
+        drawerToggle.syncState();
+
+    }
+    @Override
+
+    public void onConfigurationChanged(Configuration newConfig) {
+
+        super.onConfigurationChanged(newConfig);
+
+        // Pass any configuration change to the drawer toggles
+
+        drawerToggle.onConfigurationChanged(newConfig);
+
+    }
+
+    public void selectDrawerItem(MenuItem menuItem) {
+
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+
+        Fragment fragment = null;
+
+        Class fragmentClass;
+
+        switch(menuItem.getItemId()) {
+
+            case R.id.nav_liste_de_produits:
+
+                fragmentClass = Fragment_ProduitsList.class;
+
+                break;
+
+            case R.id.nav_liste_des_distributeurs:
+
+                fragmentClass = Fragment_DistributeurList.class;
+
+                break;
+
+            case R.id.nav_deconnexion:
+
+                fragmentClass = Fragment_Preference.class;
+
+                break;
+
+            case R.id.nav_ajouter_un_produit:
+
+                fragmentClass = Fragment_AjouterUnProduit.class;
+//                Intent intent = new Intent(this, signup.class);
+//                startActivity(intent);
+
+
+
+                break;
+
+            case R.id.nav_mes_produits:
+
+                fragmentClass = Fragment_MesProduits.class;
+
+                break;
+
+            case R.id.nav_modifier_mes_informations:
+
+                fragmentClass = Fragment_Preference.class;
+
+                break;
+
+            case R.id.nav_me_deconnecter:
+
+                fragmentClass = Fragment_Preference.class;
+
+                break;
+
+            default:
+
+                fragmentClass = Fragment_ProduitsList.class;
+
+        }
+
+
+
+        try {
+
+            fragment = (Fragment) fragmentClass.newInstance();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+
+
+        // Insert the fragment by replacing any existing fragment
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        fragmentManager.beginTransaction().replace(R.id.container_body, fragment).commit();
+
+
+
+        // Highlight the selected item has been done by NavigationView
+
+        menuItem.setChecked(true);
+
+        // Set action bar title
+
+        setTitle(menuItem.getTitle());
+
+        // Close the navigation drawer
+
+        mDrawer.closeDrawers();
+
+    }
+
+
+
+
 }

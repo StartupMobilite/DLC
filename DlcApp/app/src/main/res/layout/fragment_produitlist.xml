@@ -1,33 +1,65 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MyActivity">
-    <TextView
-        android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/tv"
-        android:visibility="invisible"
-        android:text="Categorie"/>
-    <Spinner
+
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+
+        tools:context=".MyActivity">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/topcontainer"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Categorie"
+                android:layout_gravity="center_vertical"
+                android:visibility="invisible" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_alignBaseline="@+id/tv"
+                android:layout_toRightOf="@+id/tv"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+
+
+        <view
+            android:id="@+id/recycler_view"
+            class="android.support.v7.widget.RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/topcontainer" />
+
+
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/tv"
-        android:id="@+id/spinner"
-        android:layout_alignBaseline="@+id/tv"
-        android:visibility="invisible"
-         />
-
-    <view
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        class="android.support.v7.widget.RecyclerView"
-        android:id="@+id/recycler_view"
-        android:layout_below="@id/spinner" />
-
-
-</RelativeLayout>
+        android:layout_margin="@dimen/fab_margin"
+        android:onClick="fabClicked"
+        android:layout_gravity="right|bottom"
+        app:backgroundTint="@color/colorPrimary"
+        android:src="@drawable/ic_add"
+        app:rippleColor="@color/colorPrimaryDark"
+        />
+</android.support.design.widget.CoordinatorLayout>

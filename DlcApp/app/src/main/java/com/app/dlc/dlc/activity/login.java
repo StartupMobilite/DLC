@@ -173,13 +173,13 @@ public class login extends AppCompatActivity {
                 // donnees en dur pour eviter de retaper les credentials a chaque test
 
                 //Credential User
-                credentials.put("email", "guillaumeyvo@yahoo.fr");
-                credentials.put("password", "1234");
+           /*     credentials.put("email", "guillaumeyvo@yahoo.fr");
+                credentials.put("password", "1234");*/
 
                 //Credential Distributeur
-//                credentials.put("email", "lidl@wyz.fr");
-//                credentials.put("password", "12345");
-
+             credentials.put("email", "lidl@wyz.fr");
+             credentials.put("password", "12345");
+//
                 //A decommenter pour la version finale
                 /*=======================================*/
                 //credentials.put("email", email);
