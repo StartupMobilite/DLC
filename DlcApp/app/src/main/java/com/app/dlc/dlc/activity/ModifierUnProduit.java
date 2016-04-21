@@ -54,9 +54,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class ModifierUnProduit extends AppCompatActivity {
     private static int RESULT_LOAD_IMG = 1;
@@ -74,7 +76,9 @@ public class ModifierUnProduit extends AppCompatActivity {
     List<String> categories = new ArrayList<String>();
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date;
-    Hashtable categorieTable;
+    Hashtable<String,String> categorieTable;
+    //Hashtable categorieTable;
+    Enumeration names;
     String url;
     String action;
     TextInputLayout txt_prixInitial,txt_prixFinal,txt_Quantite,txt_nomProduit,txt_dlc;
@@ -88,7 +92,8 @@ public class ModifierUnProduit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifier_un_produit);
-        categorieTable=new Hashtable();
+        categorieTable=new Hashtable<String,String>();
+        //categorieTable=new Hashtable();
         url="";
         action=getIntent().getExtras().getString("Action");
 
@@ -381,19 +386,20 @@ public class ModifierUnProduit extends AppCompatActivity {
             dataAdapter = new ArrayAdapter<String>(ModifierUnProduit.this, android.R.layout.simple_spinner_item, categories);
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(dataAdapter);
+            //spinner.setSelection(0);
             //dataAdapter.
         }
 
         private void parseCategories(String result) {
             try {
                 JSONArray response = new JSONArray(result);
-
+                categorieTable.clear();
+                //categorieTable.put()
 
                 for(int i =0;i<response.length();i++)
                 {
                     JSONObject object = response.getJSONObject(i);
 
-                    categorieTable.clear();
                     categorieTable.put(object.getString("nom"),object.getString("idcategorie"));
                     categories.add(object.getString("nom"));
                 }
@@ -451,8 +457,10 @@ public class ModifierUnProduit extends AppCompatActivity {
             productDetails.put("dlc", tv_dlc.getText());
             productDetails.put("quantite", tv_quantite.getText());
             productDetails.put("categorie", categorieTable.get(spinner.getSelectedItem().toString()));
-
-            //ImageView imgView = (ImageView) findViewById(R.id.backdrop);
+            String a =categorieTable.get(spinner.getSelectedItem().toString());
+            String c = spinner.getSelectedItem().toString();
+            String d = categorieTable.get("Cereales");
+            String e =categorieTable.get(c);
             BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
             Bitmap bitmap = drawable.getBitmap();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
