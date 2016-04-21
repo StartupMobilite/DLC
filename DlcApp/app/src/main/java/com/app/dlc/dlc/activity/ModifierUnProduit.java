@@ -457,10 +457,7 @@ public class ModifierUnProduit extends AppCompatActivity {
             productDetails.put("dlc", tv_dlc.getText());
             productDetails.put("quantite", tv_quantite.getText());
             productDetails.put("categorie", categorieTable.get(spinner.getSelectedItem().toString()));
-            String a =categorieTable.get(spinner.getSelectedItem().toString());
-            String c = spinner.getSelectedItem().toString();
-            String d = categorieTable.get("Cereales");
-            String e =categorieTable.get(c);
+
             BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
             Bitmap bitmap = drawable.getBitmap();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
