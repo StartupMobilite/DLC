@@ -264,6 +264,7 @@ public class home extends AppCompatActivity {
         // Create a new fragment and specify the fragment to show based on nav item clicked
 
         Fragment fragment = null;
+        Boolean isFragment = true;
 
         Class fragmentClass;
 
@@ -287,15 +288,6 @@ public class home extends AppCompatActivity {
 
                 break;
 
-            case R.id.nav_ajouter_un_produit:
-
-                fragmentClass = Fragment_AjouterUnProduit.class;
-//                Intent intent = new Intent(this, signup.class);
-//                startActivity(intent);
-
-
-
-                break;
 
             case R.id.nav_mes_produits:
 
@@ -306,6 +298,11 @@ public class home extends AppCompatActivity {
             case R.id.nav_modifier_mes_informations:
 
                 fragmentClass = Fragment_Preference.class;
+                Intent intent = new Intent(getApplicationContext(), signup.class);
+                startActivity(intent);
+                isFragment=false;
+
+
 
                 break;
 
@@ -321,35 +318,40 @@ public class home extends AppCompatActivity {
 
         }
 
+        if(isFragment){
+            try {
+
+                fragment = (Fragment) fragmentClass.newInstance();
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
+            }
 
 
-        try {
 
-            fragment = (Fragment) fragmentClass.newInstance();
+            // Insert the fragment by replacing any existing fragment
 
-        } catch (Exception e) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
 
-            e.printStackTrace();
+            fragmentManager.beginTransaction().replace(R.id.container_body, fragment).commit();
+
+
+
+            // Highlight the selected item has been done by NavigationView
+
+            menuItem.setChecked(true);
+
+            // Set action bar title
+
+            setTitle(menuItem.getTitle());
 
         }
 
 
 
-        // Insert the fragment by replacing any existing fragment
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        fragmentManager.beginTransaction().replace(R.id.container_body, fragment).commit();
-
-
-
-        // Highlight the selected item has been done by NavigationView
-
-        menuItem.setChecked(true);
-
-        // Set action bar title
-
-        setTitle(menuItem.getTitle());
 
         // Close the navigation drawer
 

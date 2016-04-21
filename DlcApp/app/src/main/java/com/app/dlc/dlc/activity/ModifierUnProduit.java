@@ -10,9 +10,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -47,9 +49,11 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
@@ -73,6 +77,7 @@ public class ModifierUnProduit extends AppCompatActivity {
     Hashtable categorieTable;
     String url;
     String action;
+    TextInputLayout txt_prixInitial,txt_prixFinal,txt_Quantite,txt_nomProduit,txt_dlc;
 
 
 
@@ -98,10 +103,19 @@ public class ModifierUnProduit extends AppCompatActivity {
         tv_prixinitial = (EditText) findViewById(R.id.tv_prixinitial);
         tv_prixfinal = (EditText) findViewById(R.id.tv_prixfinal);
         tv_dlc = (EditText) findViewById(R.id.tv_dlc);
+        tv_dlc.setInputType(InputType.TYPE_NULL);
+        tv_dlc.requestFocus();
         //tv_categorie = (EditText) findViewById(R.id.tv_categorie);
         tv_quantite = (EditText) findViewById(R.id.tv_quantite);
 
         tv_quantite = (EditText) findViewById(R.id.tv_quantite);
+
+
+        txt_prixInitial = (TextInputLayout) findViewById(R.id.txt_prixInitial);
+        txt_prixFinal = (TextInputLayout) findViewById(R.id.txt_prixFinal);
+        txt_Quantite = (TextInputLayout) findViewById(R.id.txt_Quantite);
+        txt_nomProduit = (TextInputLayout) findViewById(R.id.txt_nomProduit);
+        txt_dlc = (TextInputLayout) findViewById(R.id.txt_dlc);
 
 
         setSupportActionBar(toolbar);
@@ -139,7 +153,7 @@ public class ModifierUnProduit extends AppCompatActivity {
         else
         {
             categories.clear();
-            url="https://dlcapi.herokuapp.com/api/Categories&access_token="+LoggedInUser.token;
+            url="https://dlcapi.herokuapp.com/api/Categories?access_token="+LoggedInUser.token;
 
         }
 
@@ -276,9 +290,12 @@ public class ModifierUnProduit extends AppCompatActivity {
         if (id == R.id.action_save) {
             //Toast.makeText(this, "Save",Toast.LENGTH_LONG).show();
             //save();
-            String url ="https://dlcapi.herokuapp.com/api/Produits/"+idProduit;
-            UploadAsyncTask uploadAsyncTask =new UploadAsyncTask();
-            uploadAsyncTask.execute(url);
+            if(validation())
+            {
+                String url ="https://dlcapi.herokuapp.com/api/Produits/"+idProduit;
+                UploadAsyncTask uploadAsyncTask =new UploadAsyncTask();
+                uploadAsyncTask.execute(url);
+            }
 
             return true;
         }
@@ -361,7 +378,10 @@ public class ModifierUnProduit extends AppCompatActivity {
         @Override
         protected void onPostExecute(Integer result) {
 
+            dataAdapter = new ArrayAdapter<String>(ModifierUnProduit.this, android.R.layout.simple_spinner_item, categories);
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(dataAdapter);
+            //dataAdapter.
         }
 
         private void parseCategories(String result) {
@@ -428,7 +448,7 @@ public class ModifierUnProduit extends AppCompatActivity {
             productDetails.put("nom", tv_nomProduit.getText());
             productDetails.put("prixfinal", tv_prixfinal.getText());
             productDetails.put("prixinitial", tv_prixinitial.getText());
-            productDetails.put("dlc", tv_prixfinal.getText());
+            productDetails.put("dlc", tv_dlc.getText());
             productDetails.put("quantite", tv_quantite.getText());
             productDetails.put("categorie", categorieTable.get(spinner.getSelectedItem().toString()));
 
@@ -512,6 +532,59 @@ public class ModifierUnProduit extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    private boolean validation() {
+        boolean validationPass = true;
+        //TextInputLayout txt_prixInitial,txt_prixFinal,txt_Quantite;
+        if (tv_prixinitial.getText().toString().trim().isEmpty()) {
+            txt_prixInitial.setError("Veuillez renseigner le prix initial du produit");
+            validationPass = false;
+        }
+
+        if (tv_prixfinal.getText().toString().trim().isEmpty()) {
+            txt_prixFinal.setError("Veuillez renseigner le prix final du produit");
+            validationPass = false;
+        }
+
+        if (tv_quantite.getText().toString().trim().isEmpty()) {
+            txt_Quantite.setError("Veuillez renseigner la quantite disponible");
+            validationPass = false;
+        }
+
+        if(!tv_prixinitial.getText().toString().trim().isEmpty() && !tv_prixfinal.getText().toString().trim().isEmpty())
+        {
+            if(Double.parseDouble(tv_prixfinal.getText().toString())>Double.parseDouble(tv_prixinitial.getText().toString())){
+                txt_prixFinal.setError("Doit etre superieur au prix initial");
+                validationPass = false;
+            }
+        }
+
+        if(tv_nomProduit.getText().toString().trim().isEmpty()){
+            txt_nomProduit.setError("Veuillez renseigner un nom pour le produit");
+            validationPass = false;
+        }
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDate = df.format(Calendar.getInstance().getTime());
+
+        try{
+            Date dlc = df.parse(tv_dlc.getText().toString());
+            Date DcurrentDate = df.parse(currentDate);
+
+            if (dlc.compareTo(DcurrentDate)<0)
+            {
+                txt_dlc.setError("Produit deja expire");
+                validationPass = false;
+            }
+
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return validationPass;
     }
 
 }

@@ -145,11 +145,11 @@ public class DrawerTest extends AppCompatActivity {
 
                 break;
 
-            case R.id.nav_ajouter_un_produit:
+            /*case R.id.nav_ajouter_un_produit:
 
                 fragmentClass = Fragment_AjouterUnProduit.class;
 
-                break;
+                break;*/
 
             case R.id.nav_mes_produits:
 

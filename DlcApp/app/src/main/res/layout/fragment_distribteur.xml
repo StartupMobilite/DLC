@@ -56,28 +56,47 @@
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
-                android:weightSum="3"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="kjlk"
-                    android:layout_weight="1"/>
-                <TimePicker
-                    android:id="@+id/input_open"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_horizontal" />
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                android:layout_height="match_parent">
 
-                <TimePicker
-                    android:id="@+id/input_close"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_horizontal" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/txtInputHoraireOuverture"
+                        android:layout_width="150dp"
+                        android:weightSum="0.5"
+                        android:layout_marginRight="45dp"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/tv_horaireOuverture"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:hint="Horaire ouverture" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/txtInputHoraireFermerture"
+                        android:weightSum="0.5"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/tv_horaireFermerture"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:hint="@string/horaireFermerrture" />
+                    </android.support.design.widget.TextInputLayout>
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp" />
+
             </LinearLayout>
+
+
 
 
             <Button android:id="@+id/btn_signup"

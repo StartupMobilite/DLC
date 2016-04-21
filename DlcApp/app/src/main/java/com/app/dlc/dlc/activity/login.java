@@ -1,6 +1,7 @@
 package com.app.dlc.dlc.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -113,15 +114,25 @@ public class login extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String url = "https://dlcapi.herokuapp.com/api/Produits";
-                email =input_email.getText().toString();
-                password=input_password.getText().toString();
-                LoginAsyncTask d = new LoginAsyncTask();
+                ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
+                if(cd.isOnline())
+                {
+                    String url = "https://dlcapi.herokuapp.com/api/Produits";
+                    email =input_email.getText().toString();
+                    password=input_password.getText().toString();
+                    LoginAsyncTask d = new LoginAsyncTask();
 
-                //execute la tache asynchrone
-                d.execute(url);
+                    //execute la tache asynchrone
+                    d.execute(url);
 
-                //ordre d execution de toute tache asynchrone onPreExecute => doInBackground => onPostExecute
+                    //ordre d execution de toute tache asynchrone onPreExecute => doInBackground => onPostExecute
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"You are not connected to internet",Toast.LENGTH_LONG).show();
+                }
+
+
             }
         });
     }
@@ -157,7 +168,7 @@ public class login extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivityForResult(intent, 0); // execution de l intent
             }
-            else //si l authentification echoue
+            else if(responseCode.equals("401")) //si l authentification echoue
             {
                 Toast.makeText(getApplicationContext(), "Identifiants invalides", Toast.LENGTH_LONG).show();
             }

@@ -81,7 +81,7 @@
                         android:layout_below="@+id/Titre"
                         android:layout_height="match_parent">
                         <android.support.design.widget.TextInputLayout
-                            android:id="@+id/lbl_nomProduit"
+                            android:id="@+id/txt_nomProduit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.4">
@@ -89,7 +89,7 @@
                             <EditText
                                 android:id="@+id/tv_nomProduit"                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Prix initial"
+                                android:hint="Nom du produit"
                                 android:inputType="text" />
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
@@ -192,7 +192,8 @@
 
                         <Spinner
                             android:id="@+id/categorie_spinner"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center_vertical"
                             android:layout_height="match_parent">
 
                         </Spinner>
@@ -219,7 +220,7 @@
 
             </android.support.v7.widget.CardView>
 
-
+<!--
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -300,7 +301,7 @@
 
                 </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>-->
 
         </LinearLayout>
 

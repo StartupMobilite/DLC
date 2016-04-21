@@ -92,6 +92,8 @@
     <string name="hint_voie">Nom et/ou numéro de voie</string>
     <string name="hint_ville">Ville</string>
     <string name="hint_zip">Code postal</string>
+    <string name="horaireOuverture">Horaire d\'ouverture</string>
+    <string name="horaireFermerrture">Horaire de fermerture</string>
 
 
 
