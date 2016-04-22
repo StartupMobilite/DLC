@@ -2,6 +2,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true">
+
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -10,11 +11,37 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="10dp">
+            android:paddingRight="20dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword" />
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_voie"
@@ -25,8 +52,8 @@
                     android:id="@+id/input_voie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:hint="@string/hint_voie" />
+                    android:hint="@string/hint_voie"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -38,8 +65,8 @@
                     android:id="@+id/input_ville"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:hint="@string/hint_ville" />
+                    android:hint="@string/hint_ville"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -51,69 +78,69 @@
                     android:id="@+id/input_zip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:hint="@string/hint_zip" />
+                    android:hint="@string/hint_zip"
+                    android:inputType="textPostalAddress"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:weightSum="1"
-                android:layout_height="match_parent">
+                android:weightSum="1">
 
 
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/txtInputHoraireOuverture"
-                        android:layout_width="150dp"
-                        android:weightSum="0.5"
-                        android:layout_marginRight="45dp"
-                        android:layout_height="wrap_content">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txtInputHoraireOuverture"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:weightSum="0.5">
 
-                        <EditText
-                            android:id="@+id/tv_horaireOuverture"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:singleLine="true"
-                            android:hint="Horaire ouverture" />
-                    </android.support.design.widget.TextInputLayout>
+                    <EditText
+                        android:id="@+id/tv_horaireOuverture"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Horaire ouverture"
+                        android:inputType="datetime"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
 
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/txtInputHoraireFermerture"
-                        android:weightSum="0.5"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txtInputHoraireFermerture"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:weightSum="0.5">
 
-                        <EditText
-                            android:id="@+id/tv_horaireFermerture"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:singleLine="true"
-                            android:hint="@string/horaireFermerrture" />
-                    </android.support.design.widget.TextInputLayout>
-                <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp" />
+                    <EditText
+                        android:id="@+id/tv_horaireFermerture"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/horaireFermerrture"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
 
             </LinearLayout>
 
 
-
-
-            <Button android:id="@+id/btn_signup"
+            <Button
+                android:id="@+id/btn_signup"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_sign_up"
                 android:layout_marginTop="40dp"
                 android:background="@color/colorPrimary"
-                android:textColor="@android:color/white"/>
+                android:text="@string/btn_sign_up"
+                android:textColor="@android:color/white" />
 
-            <TextView android:id="@+id/link_signup"
+            <TextView
+                android:id="@+id/link_login"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Deja membre ? Identifiez-vous"
                 android:gravity="center"
-                android:textSize="16dip"/>
+                android:text="Deja membre ? Identifiez-vous"
+                android:textSize="16dip" />
 
         </LinearLayout>
 

@@ -1,9 +1,7 @@
 package com.app.dlc.dlc;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -11,19 +9,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.app.dlc.dlc.activity.home;
-import com.app.dlc.dlc.model.Categorie;
 import com.app.dlc.dlc.model.Distributeur;
 import com.app.dlc.dlc.model.LoggedInUser;
-import com.app.dlc.dlc.model.Produit;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import org.json.JSONArray;
@@ -31,20 +23,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class detail extends AppCompatActivity {
     TextView nom,tv_prixinitial,tv_prixfinal,tv_dlc,tv_categorie,tv_quantite;
-    TextView tv_nomDistributeur,tv_addresseDistributeur;
+    TextView tv_nomDistributeur,tv_voie,tv_ville_codePostal;
     ImageView image;
     ExpandableRelativeLayout expandableLayoutInfoDistributeur;
     String idDistributeur;
@@ -67,14 +53,15 @@ public class detail extends AppCompatActivity {
         tv_categorie = (TextView) findViewById(R.id.tv_categorie);
         tv_quantite = (TextView) findViewById(R.id.tv_quantite);
         tv_nomDistributeur = (TextView) findViewById(R.id.tv_nomDistributeur);
-        tv_addresseDistributeur = (TextView) findViewById(R.id.tv_addresseDistributeur);
+        tv_voie = (TextView) findViewById(R.id.tv_voie);
+        tv_ville_codePostal = (TextView) findViewById(R.id.tv_ville_codePostal);
         tv_quantite = (TextView) findViewById(R.id.tv_quantite);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("google.navigation:q="+tv_addresseDistributeur.getText()));
+                        Uri.parse("google.navigation:q="+tv_voie.getText()));
                 startActivity(intent);
             }
         });
@@ -168,7 +155,8 @@ public class detail extends AppCompatActivity {
 
             if (result == 1) {
                 tv_nomDistributeur.setText(distributeur.getNom());
-                tv_addresseDistributeur.setText(distributeur.getAddresse());
+                tv_voie.setText(distributeur.getVoie());
+                tv_ville_codePostal.setText(distributeur.getVille()+", "+distributeur.getCodePostal());
 
 
             } else {
@@ -187,6 +175,9 @@ public class detail extends AppCompatActivity {
                     distributeur.setNom(object.getString("nom"));
                     distributeur.setId(object.getInt("id"));
                     distributeur.setAddresse(object.getString("voie")+","+object.getString("ville")+","+object.getString("codepostal"));
+                    distributeur.setVoie(object.getString("voie"));
+                    distributeur.setVille(object.getString("ville"));
+                    distributeur.setCodePostal(object.getString("codepostal"));
                     distributeur.setHoraireOuverture(object.getString("horaireOuverture"));
                     distributeur.setHoraireFermerture(object.getString("horaireFermerture"));
                     distributeur.setImage(object.getString("image"));

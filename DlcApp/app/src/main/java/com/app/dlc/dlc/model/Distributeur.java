@@ -10,6 +10,33 @@ public class Distributeur {
     private String horaireOuverture;
     private String horaireFermerture;
     private String image;
+    private String voie;
+    private String ville;
+    private String codePostal;
+
+    public String getVoie() {
+        return voie;
+    }
+
+    public void setVoie(String voie) {
+        this.voie = voie;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public String getCodePostal() {
+        return codePostal;
+    }
+
+    public void setCodePostal(String codePostal) {
+        this.codePostal = codePostal;
+    }
 
     public int getId() {
         return id;

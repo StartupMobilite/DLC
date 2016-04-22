@@ -144,6 +144,7 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        fab.setVisibility(View.INVISIBLE);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -151,12 +152,13 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
 
             if (id == -1) {
                 url = "https://dlcapi.herokuapp.com/api/Produits";
-                fab.setVisibility(View.INVISIBLE);
+                //fab.setVisibility(View.INVISIBLE);
             } else {
                 url = "https://dlcapi.herokuapp.com/api/Produits?filter[where][iddistributeur]=" + id;
-                fab.setVisibility(View.VISIBLE);
+                //fab.setVisibility(View.VISIBLE);
             }
         } else {
+            //fab.setVisibility(View.INVISIBLE);
             url = "https://dlcapi.herokuapp.com/api/Produits";
 
         }

@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -127,15 +128,11 @@ public class ModifierUnProduit extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-      /*  InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        im.hideSoftInputFromWindow(tv_dlc.getWindowToken(), 0);*/
-
-
-        //if(getIntent().getExtras().getString("Modif"))
+        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
         if(action.equals("Modifier"))
         {
-
+            collapsingToolbarLayout.setTitle(getIntent().getExtras().getString("Nom"));
             tv_nomProduit.setText(getIntent().getExtras().getString("Nom"));
             idDistributeur = getIntent().getExtras().getString("IdDistributeur");
             idProduit = getIntent().getExtras().getString("Id");
@@ -159,6 +156,10 @@ public class ModifierUnProduit extends AppCompatActivity {
         else
         {
             categories.clear();
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            String currentDate = df.format(Calendar.getInstance().getTime());
+            tv_dlc.setText(currentDate);
+            collapsingToolbarLayout.setTitle(" ");
             url="https://dlcapi.herokuapp.com/api/Categories?access_token="+LoggedInUser.token;
 
         }
@@ -197,12 +198,6 @@ public class ModifierUnProduit extends AppCompatActivity {
 
         });
 
-
-
-
-
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,10 +211,6 @@ public class ModifierUnProduit extends AppCompatActivity {
             }
         });
 
-
-
-
-
         new DownloasdCategoriesAsyncHttpTask().execute(url);
 
     }
@@ -228,7 +219,6 @@ public class ModifierUnProduit extends AppCompatActivity {
 
         String myFormat = "dd/MM/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
         tv_dlc.setText(sdf.format(myCalendar.getTime()));
     }
 
