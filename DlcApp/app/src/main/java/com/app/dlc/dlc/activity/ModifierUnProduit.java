@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -263,8 +264,13 @@ public class ModifierUnProduit extends AppCompatActivity {
                 cursor.close();
                 ImageView imgView = (ImageView) findViewById(R.id.backdrop);
                 // Set the Image in ImageView after decoding the String
-                imgView.setImageBitmap(BitmapFactory
-                        .decodeFile(imgDecodableString));
+
+                //getResizedBitmap(BitmapFactory.decodeFile(imgDecodableString), imgView.getHeight(),imgView.getWidth());
+
+                //imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                imgView.setImageBitmap(getResizedBitmap(BitmapFactory.decodeFile(imgDecodableString), imgView.getHeight(),imgView.getWidth()));
+
+
 
             } else {
                 Toast.makeText(this, "Vous n'avez choisi aucune image",
@@ -274,6 +280,32 @@ public class ModifierUnProduit extends AppCompatActivity {
             Toast.makeText(this, "Une erreur s est produite", Toast.LENGTH_LONG)
                     .show();
         }
+
+    }
+
+    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
+
+        int width = bm.getWidth();
+
+        int height = bm.getHeight();
+
+        float scaleWidth = ((float) newWidth) / width;
+
+        float scaleHeight = ((float) newHeight) / height;
+
+// create a matrix for the manipulation
+
+        Matrix matrix = new Matrix();
+
+// resize the bit map
+
+        matrix.postScale(scaleWidth, scaleHeight);
+
+// recreate the new Bitmap
+
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+
+        return resizedBitmap;
 
     }
 
