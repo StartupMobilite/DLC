@@ -1,7 +1,12 @@
 package com.app.dlc.dlc.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +16,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,8 +37,20 @@ import com.app.dlc.dlc.fragment.distributeur.Fragment_ModifierMesInformations;
 import com.app.dlc.dlc.fragment.utilisateur.Fragment_DistributeurList;
 import com.app.dlc.dlc.fragment.utilisateur.Fragment_Preference;
 import com.app.dlc.dlc.fragment.utilisateur.Fragment_ProduitsList;
+import com.app.dlc.dlc.model.InfosDistributeur;
 import com.app.dlc.dlc.model.LoggedInUser;
+import com.app.dlc.dlc.preferences;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,11 +62,23 @@ public class home extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
+    private ProgressDialog dialog;
+    String nom;
+    String voie;
+    String ville;
+    String zip;
+    String horaireOuverture;
+    String horaireFermerture;
+    byte[] imageAsBytes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+        dialog = new ProgressDialog(this);
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.setMessage("Loading. Please wait...");
 
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar); // reference de la toolbar definit dans le layout de l activite
@@ -298,12 +329,20 @@ public class home extends AppCompatActivity {
             case R.id.nav_modifier_mes_informations:
 
                 fragmentClass = Fragment_Preference.class;
-                Intent intent = new Intent(getApplicationContext(), signup.class);
+                //Intent intent = new Intent(getApplicationContext(), signup.class);
+
+                Intent intent = new Intent(getApplicationContext(), preferences.class);
+                intent.putExtra("Nom", InfosDistributeur.getNom());
+                intent.putExtra("Id", InfosDistributeur.getId());
+                intent.putExtra("voie", InfosDistributeur.getVoie());
+                intent.putExtra("ville", InfosDistributeur.getVille());
+                intent.putExtra("codepostal", InfosDistributeur.getCodePostal());
+                intent.putExtra("horaireOuverture", InfosDistributeur.getHoraireOuverture());
+                intent.putExtra("horaireFermerture", InfosDistributeur.getHoraireFermerture());
+                byte[] imageAsBytes = Base64.decode(InfosDistributeur.getImage().getBytes(), Base64.DEFAULT);
+                intent.putExtra("Image", imageAsBytes);
                 startActivity(intent);
                 isFragment=false;
-
-
-
                 break;
 
             case R.id.nav_me_deconnecter:
@@ -358,6 +397,10 @@ public class home extends AppCompatActivity {
         mDrawer.closeDrawers();
 
     }
+
+
+
+
 
 
 

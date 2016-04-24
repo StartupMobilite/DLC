@@ -3,9 +3,11 @@ package com.app.dlc.dlc.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,8 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.dlc.dlc.R;
+import com.app.dlc.dlc.model.InfosDistributeur;
 import com.app.dlc.dlc.model.LoggedInUser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -267,6 +271,30 @@ public class login extends AppCompatActivity {
                         parseResult(jsonResponse.toString());
                         LoggedInUser.type = "distributeur";
 
+                        URL req = new URL("https://dlcapi.herokuapp.com/api/Distributeurs?filter[where][id]="+LoggedInUser.getId()+"&access_token="+LoggedInUser.getToken());
+                        HttpURLConnection reqconnection=null;
+                        reqconnection = (HttpURLConnection) req.openConnection();
+                        //reqconnection.setDoOutput(true);
+                        reqconnection.setDoInput(true);
+                        // is output buffer writter
+                        reqconnection.setRequestMethod("GET");
+                        /*reqconnection.setRequestProperty("Content-Type", "application/json");
+                        reqconnection.setRequestProperty("Accept", "application/json");*/
+
+                        reqconnection.connect();
+                        Integer rep = reqconnection.getResponseCode();
+                        String rh = Integer.toString(rep) ;
+                        if(rep==200){
+                            BufferedReader br = new BufferedReader(new InputStreamReader(reqconnection.getInputStream()));
+                            StringBuilder distributeurDetails = new StringBuilder();
+                            String data;
+                            while ((data = br.readLine()) != null) {
+                                distributeurDetails.append(data);
+                            }
+                            parseDistributeurData(distributeurDetails.toString());
+
+                        }
+
                     }
                     
                 }
@@ -290,6 +318,30 @@ public class login extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+
+        private void parseDistributeurData(String result){
+
+            try {
+                JSONArray response = new JSONArray(result);
+                for (int i = 0; i < response.length(); i++) {
+                    JSONObject object = response.getJSONObject(i);
+                    InfosDistributeur.setId(Integer.parseInt(object.getString("id")));
+                    InfosDistributeur.setNom(object.getString("nom"));
+                    InfosDistributeur.setVoie(object.getString("voie"));
+                    InfosDistributeur.setVille(object.getString("ville"));
+                    InfosDistributeur.setCodePostal(object.getString("codepostal"));
+                    InfosDistributeur.setHoraireOuverture(object.getString("horaireOuverture"));
+                    InfosDistributeur.setHoraireFermerture(object.getString("horaireFermerture"));
+                    InfosDistributeur.setImage(object.getString("image"));
+
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }

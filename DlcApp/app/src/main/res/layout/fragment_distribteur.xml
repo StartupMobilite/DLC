@@ -1,12 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fitsSystemWindows="true">
-
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_height="fill_parent">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -15,6 +9,19 @@
             android:orientation="vertical"
             android:paddingLeft="20dp"
             android:paddingRight="20dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nom de votre surface de distribution"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_email"
@@ -79,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_zip"
-                    android:inputType="textPostalAddress"
+                    android:inputType="numberSigned"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
@@ -123,26 +130,25 @@
 
             </LinearLayout>
 
-
             <Button
                 android:id="@+id/btn_signup"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:background="@color/colorPrimary"
                 android:text="@string/btn_sign_up"
                 android:textColor="@android:color/white" />
-
             <TextView
-                android:id="@+id/link_login"
+                android:id="@+id/tv_member"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="14dp"
                 android:gravity="center"
                 android:text="Deja membre ? Identifiez-vous"
                 android:textSize="16dip" />
 
+
         </LinearLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
+
 </ScrollView>
