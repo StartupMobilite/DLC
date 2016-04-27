@@ -332,7 +332,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="Addresse :"
+                    android:text="Adresse :"
                     android:id="@+id/lbl_addresse"
                     android:layout_marginRight="10dp"
                     android:layout_below="@+id/tv_nomDistributeur"

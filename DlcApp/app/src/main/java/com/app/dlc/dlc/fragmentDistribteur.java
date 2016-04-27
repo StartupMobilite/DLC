@@ -467,7 +467,7 @@ public class fragmentDistribteur extends Fragment {
         JSONObject productDetails = new JSONObject();
         try {
 
-            /*productDetails.put("voie", input_voie.getText());
+            productDetails.put("voie", input_voie.getText());
             productDetails.put("ville", input_ville.getText());
             productDetails.put("codepostal", input_zip.getText());
             productDetails.put("horaireOuverture", tv_horaireOuverture.getText());
@@ -475,15 +475,14 @@ public class fragmentDistribteur extends Fragment {
             productDetails.put("email", input_email.getText());
             productDetails.put("nom", input_name.getText());
             productDetails.put("password", input_password.getText());
-*/
-            productDetails.put("voie", "20 rue fontarabie");
+            /*productDetails.put("voie", "20 rue fontarabie");
             productDetails.put("ville", "Paris");
             productDetails.put("codepostal", "75020");
             productDetails.put("horaireOuverture", tv_horaireOuverture.getText());
             productDetails.put("horaireFermerture", tv_horaireFermerture.getText());
             productDetails.put("email", "abc@yxz.com");
             productDetails.put("nom", "ABC");
-            productDetails.put("password", "12345");
+            productDetails.put("password", "12345");*/
             if(imageByte.toString().length()>0)
                 productDetails.put("image", imageByte);
 
