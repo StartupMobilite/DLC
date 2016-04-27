@@ -99,7 +99,7 @@ public class login extends AppCompatActivity {
         dialog = new ProgressDialog(this);
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
-        dialog.setMessage("Loading. Please wait...");
+        dialog.setMessage("Chargement des donnees en cours ...");
 
 
 

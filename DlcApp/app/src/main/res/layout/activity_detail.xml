@@ -84,55 +84,162 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:text="Info"
+                        android:layout_marginBottom="14dp"
+                        android:text="Details"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/colorPrimary"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:textColor="#388E3C" />
+                         />
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:id="@+id/firstRow"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="150dp"
                         android:orientation="horizontal">
 
-                        <TextView
+                       <!-- <TextView
                             android:id="@+id/lbl_prixInitial"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginRight="20dp"
-                            android:text="Prix initial : " />
+                            android:text="Prix initial : " />-->
+
+                        <TextView
+                            android:id="@+id/lbl_categorie"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:layout_marginBottom="8dp"
+                            android:text="Categorie" />
+                        <TextView
+                            android:id="@+id/tv_categorie"
+                            android:layout_width="wrap_content"
+                            android:layout_alignBaseline="@+id/lbl_categorie"
+                            android:textSize="18sp"
+                            android:layout_alignParentEnd="true"
+                            android:text="Produit laitier"
+                            android:layout_height="wrap_content" />
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dip"
+                            android:id="@+id/hl1"
+                            android:layout_below="@+id/lbl_categorie"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/colorPrimary">
+
+                        </RelativeLayout>
+                        <TextView
+                            android:id="@+id/lbl_dlc"
+                            android:layout_width="wrap_content"
+                            android:layout_below="@+id/hl1"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:text="Dlc" />
+
+                        <TextView
+                            android:id="@+id/tv_dlc"
+                            android:layout_width="wrap_content"
+                            android:textSize="18sp"
+                            android:layout_alignBaseline="@+id/lbl_dlc"
+                            android:layout_alignParentEnd="true"
+                            android:text="10000"
+                            android:layout_height="wrap_content" />
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dip"
+                            android:id="@+id/hl2"
+                            android:layout_below="@+id/lbl_dlc"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/colorPrimary">
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/lbl_quantite"
+                            android:layout_below="@+id/hl2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:text="Quantite" />
+
+                        <TextView
+                            android:id="@+id/tv_quantite"
+                            android:layout_width="wrap_content"
+                            android:layout_alignBaseline="@+id/lbl_quantite"
+                            android:layout_alignParentEnd="true"
+                            android:textSize="18sp"
+                            android:text="100000"
+                            android:layout_height="wrap_content" />
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dip"
+                            android:id="@+id/hl3"
+                            android:layout_below="@+id/lbl_quantite"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/colorPrimary">
+
+                        </RelativeLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/hl3"
+                            android:id="@+id/lbl_prix"
+                            android:textSize="18sp"
+                            android:text="Prix"/>
 
                         <TextView
                             android:id="@+id/tv_prixinitial"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_below="@+id/hl3"
+                            android:layout_alignBaseline="@+id/lbl_prix"
+                            android:layout_toLeftOf="@+id/tv_prixfinal"
                             android:text="1000" />
 
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/lbl_prixFinal"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="Prix final :" />
-
-                        <TextView
-                            android:id="@+id/tv_prixfinal"
-                            android:text="1000"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/lbleuro2"
+                            android:layout_toRightOf="@+id/tv_prixinitial"
+                            android:layout_alignBaseline="@+id/lbl_prix"
+                            android:text="€"
                             android:layout_height="wrap_content" />
 
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        <!-- <TextView
+                             android:id="@+id/lbl_prixFinal"
+                             android:layout_width="wrap_content"
+                             android:layout_height="match_parent"
+                             android:text="Prix final :" />
+ -->
                         <TextView
+                            android:id="@+id/tv_prixfinal"
+                            android:layout_toLeftOf="@+id/lbleuro1"
+                            android:layout_alignBaseline="@+id/lbl_prix"
+                            android:layout_marginLeft="18dp"
+                            android:text="1000"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:id="@+id/lbleuro1"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignBaseline="@+id/lbl_prix"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:text="€"
+                            android:layout_height="wrap_content" />
+
+
+
+                        <!--<TextView
                             android:id="@+id/lbl_dlc"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -144,30 +251,12 @@
                             android:text="10000"
                             android:layout_height="wrap_content" />
 
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/lbl_categorie"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="Categorie :" />
 
-                        <TextView
-                            android:id="@+id/tv_categorie"
-                            android:layout_width="wrap_content"
-                            android:text="100000"
-                            android:layout_height="wrap_content" />
 
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+
+
                         <TextView
                             android:id="@+id/lbl_quantite"
                             android:layout_width="wrap_content"
@@ -180,15 +269,12 @@
                             android:text="100000"
                             android:layout_height="wrap_content" />
 
-                    </LinearLayout>
+-->
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
 
-                    </LinearLayout>
 
+
+                    </RelativeLayout>
 
 
 

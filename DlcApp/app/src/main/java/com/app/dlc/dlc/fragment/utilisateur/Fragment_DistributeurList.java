@@ -78,7 +78,7 @@ public class Fragment_DistributeurList extends Fragment implements SearchView.On
         dialog = new ProgressDialog(getActivity());
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
-        dialog.setMessage("Loading. Please wait...");
+        dialog.setMessage("Chargement en cours...");
 
         //reference au recycleview declare dans le fichier fragment_distributeurlist
         mRecyclerView = (RecyclerView)rootView.findViewById(R.id.recycler_view);

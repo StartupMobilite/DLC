@@ -2,6 +2,7 @@ package com.app.dlc.dlc;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -81,6 +82,7 @@ public class detail extends AppCompatActivity {
         String nom = getIntent().getExtras().getString("Nom");
         idDistributeur = getIntent().getExtras().getString("IdDistributeur");
         tv_prixinitial.setText(getIntent().getExtras().getString("PrixInitial"));
+        tv_prixinitial.setPaintFlags(tv_prixinitial.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         tv_prixfinal.setText(getIntent().getExtras().getString("PrixFinal"));
         tv_dlc.setText(getIntent().getExtras().getString("Dlc"));
         tv_categorie.setText(getIntent().getExtras().getString("Categorie"));

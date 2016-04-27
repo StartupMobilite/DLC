@@ -107,7 +107,7 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
         dialog = new ProgressDialog(getActivity());
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
-        dialog.setMessage("Loading. Please wait...");
+        dialog.setMessage("Chargement en cours...");
         final String url;
         spinner = (Spinner) rootView.findViewById(R.id.spinner);
         tv = (TextView) rootView.findViewById(R.id.tv);
