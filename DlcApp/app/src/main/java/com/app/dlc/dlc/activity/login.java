@@ -241,7 +241,8 @@ public class login extends AppCompatActivity {
                     // le type sera utlise plus tard en vu de definit les prochaines actions a executer en fonction du type de
                     // l utlisateur authentife
                     LoggedInUser.type = "utilisateur";
-                    LoggedInUser.setEmail("xyz@yahoo.fr");
+                    LoggedInUser.setEmail(email);
+                    //LoggedInUser.setEmail("xyz@yahoo.fr");
                 }
                 else //en cas d echec on teste si c est un distributeur en se basant sur le meme principe
                 {
@@ -272,7 +273,8 @@ public class login extends AppCompatActivity {
                         }
                         parseResult(jsonResponse.toString());
                         LoggedInUser.type = "distributeur";
-                        LoggedInUser.setEmail("xyz@yahoo.fr");
+                        LoggedInUser.setEmail(email);
+                        //LoggedInUser.setEmail("xyz@yahoo.fr");
 
                         URL req = new URL("https://dlcapi.herokuapp.com/api/Distributeurs?filter[where][id]="+LoggedInUser.getId()+"&access_token="+LoggedInUser.getToken());
                         HttpURLConnection reqconnection=null;
