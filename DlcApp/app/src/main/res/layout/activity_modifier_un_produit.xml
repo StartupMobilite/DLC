@@ -11,7 +11,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/detail_backdrop_height"
+        android:layout_height="316dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingTop="0dp">
+            android:paddingTop="1dp">
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -74,21 +74,28 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
+                        android:gravity="center_horizontal"
                         android:text="Informations"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/colorPrimary" />
+
                     <LinearLayout
-                        android:layout_width="match_parent"
                         android:id="@+id/belowHeader"
-                        android:layout_below="@+id/Titre"
-                        android:layout_height="match_parent">
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="8dp"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/Titre">
+
                         <android.support.design.widget.TextInputLayout
                             android:id="@+id/txt_nomProduit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
                             android:layout_weight="0.4">
 
                             <EditText
-                                android:id="@+id/tv_nomProduit"                                android:layout_width="match_parent"
+                                android:id="@+id/tv_nomProduit"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Nom du produit"
                                 android:inputType="text" />
@@ -100,33 +107,37 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@id/belowHeader"
+                        android:layout_marginBottom="8dp"
                         android:orientation="horizontal"
                         android:weightSum="1">
 
 
                         <android.support.design.widget.TextInputLayout
                             android:id="@+id/txt_prixInitial"
-                            android:layout_width="match_parent"
+                            android:layout_width="240dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.4">
+                            android:layout_weight="0.50">
 
                             <EditText
-                                android:id="@+id/tv_prixinitial"                                android:layout_width="match_parent"
+                                android:id="@+id/tv_prixinitial"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Prix initial"
+                                android:hint="Prix initial en €"
                                 android:inputType="numberDecimal" />
                         </android.support.design.widget.TextInputLayout>
 
 
                         <android.support.design.widget.TextInputLayout
-                            android:id="@+id/txt_prixFinal"                            android:layout_width="match_parent"
+                            android:id="@+id/txt_prixFinal"
+                            android:layout_width="240dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.4">
+                            android:layout_weight="0.50">
 
                             <EditText
-                                android:id="@+id/tv_prixfinal"                                android:layout_width="match_parent"
+                                android:id="@+id/tv_prixfinal"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Prix final"
+                                android:hint="Prix final en €"
                                 android:inputType="numberDecimal" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -138,6 +149,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@+id/firstRow"
+                        android:layout_marginBottom="8dp"
                         android:orientation="horizontal"
                         android:weightSum="1">
 
@@ -146,31 +158,28 @@
                             android:id="@+id/txt_dlc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.4">
+                            android:layout_weight="0.5">
 
-                                <EditText
+                            <EditText
                                 android:id="@+id/tv_dlc"
-                                android:layout_width="match_parent"
+                                android:layout_width="240dp"
                                 android:layout_height="wrap_content"
-                                android:hint="Dlc"
-                                 />
+                                android:hint="Dlc" />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
                             android:id="@+id/txt_Quantite"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5">
 
                             <EditText
                                 android:id="@+id/tv_quantite"
-                                android:layout_width="match_parent"
+                                android:layout_width="240dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Quantite disponible"
                                 android:inputType="numberSigned" />
                         </android.support.design.widget.TextInputLayout>
-
-
-
 
 
                     </LinearLayout>
@@ -185,32 +194,34 @@
                         android:weightSum="1">
 
                         <TextView
+                            android:id="@+id/lbl_categorie"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="Categorie"
-                            android:layout_gravity="center_vertical"
-                            android:id="@+id/lbl_categorie"/>
+                            android:layout_marginTop="7dp"
+                            android:gravity="center_vertical"
+                            android:text="Categorie" />
 
                         <Spinner
                             android:id="@+id/categorie_spinner"
-                            android:layout_width="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_height="match_parent">
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:layout_marginTop="7dp">
 
                         </Spinner>
 
                         <!--<android.support.design.widget.TextInputLayout-->
-                            <!--android:id="@+id/txt_categorie"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_weight="0.4">-->
+                        <!--android:id="@+id/txt_categorie"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="0.4">-->
 
-                            <!--<EditText-->
-                                <!--android:id="@+id/tv_categorie"-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:hint="Categorie"-->
-                                <!--android:inputType="textEmailAddress" />-->
+                        <!--<EditText-->
+                        <!--android:id="@+id/tv_categorie"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:hint="Categorie"-->
+                        <!--android:inputType="textEmailAddress" />-->
                         <!--</android.support.design.widget.TextInputLayout>-->
 
 
@@ -221,88 +232,88 @@
 
             </android.support.v7.widget.CardView>
 
-<!--
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/card_margin">
+            <!--
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/card_margin">
 
-                <LinearLayout
-                    style="@style/Widget.CardContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                            <LinearLayout
+                                style="@style/Widget.CardContent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Description"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Description"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textImeMultiLine"
-                        android:lines="5"
-                        android:maxLines="8"
-                        android:text="@string/cheese_ipsum" />
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textImeMultiLine"
+                                    android:lines="5"
+                                    android:maxLines="8"
+                                    android:text="@string/cheese_ipsum" />
 
-                </LinearLayout>
+                            </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+                        </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/card_margin"
-                android:layout_marginLeft="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin">
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/card_margin"
+                            android:layout_marginLeft="@dimen/card_margin"
+                            android:layout_marginRight="@dimen/card_margin">
 
-                <LinearLayout
-                    style="@style/Widget.CardContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                            <LinearLayout
+                                style="@style/Widget.CardContent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Friends"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Friends"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cheese_ipsum" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/cheese_ipsum" />
 
-                </LinearLayout>
+                            </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+                        </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/card_margin"
-                android:layout_marginLeft="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin">
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/card_margin"
+                            android:layout_marginLeft="@dimen/card_margin"
+                            android:layout_marginRight="@dimen/card_margin">
 
-                <LinearLayout
-                    style="@style/Widget.CardContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                            <LinearLayout
+                                style="@style/Widget.CardContent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Related"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Related"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cheese_ipsum" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/cheese_ipsum" />
 
-                </LinearLayout>
+                            </LinearLayout>
 
-            </android.support.v7.widget.CardView>-->
+                        </android.support.v7.widget.CardView>-->
 
         </LinearLayout>
 

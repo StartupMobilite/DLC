@@ -8,7 +8,7 @@
 
             android:id="@+id/nav_liste_de_produits"
 
-            android:icon="@drawable/ic_forum"
+            android:icon="@drawable/ic_local_grocery_store_white_24dp"
             android:checked="true"
 
             android:title="Produits" />
@@ -17,7 +17,7 @@
 
             android:id="@+id/nav_liste_des_distributeurs"
 
-            android:icon="@drawable/ic_event"
+            android:icon="@drawable/ic_business_white_24dp"
 
             android:title="Distributeurs" />
 
@@ -29,7 +29,7 @@
                 <item
                     android:id="@+id/nav_deconnexion"
 
-                    android:icon="@drawable/ic_dashboard"
+                    android:icon="@drawable/ic_exit_to_app_white_24dp"
 
                     android:title="Se deconnecter" />
 

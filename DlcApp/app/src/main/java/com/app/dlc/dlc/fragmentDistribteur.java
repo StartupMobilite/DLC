@@ -208,6 +208,11 @@ public class fragmentDistribteur extends Fragment {
                                     // the dialog box and do nothing
 
                                     dialog.cancel();
+                                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.placeholder);
+                                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                                    byte[] bitmapdata = stream.toByteArray();
+                                    imageByte = Base64.encodeToString(bitmapdata, Base64.NO_WRAP);
                                     SignInAsyncTask sat= new SignInAsyncTask();
                                     sat.execute("ok");
                                 }
@@ -336,15 +341,25 @@ public class fragmentDistribteur extends Fragment {
             input_layout_email.setError("Addresse email incorrecte");
             validationPass = false;
         }
+        else {
+            input_layout_email.setErrorEnabled(false);
+        }
 
         if (input_name.getText().toString().trim().isEmpty()) {
             input_layout_name.setError("Entrez le nom de votre surface");
             validationPass = false;
         }
+        else
+        {
+            input_layout_name.setErrorEnabled(false);
+        }
 
         if (input_password.getText().toString().trim().isEmpty() || input_password.getText().length()<5) {
             input_layout_password.setError("Entrez un mot de passe d'au moins 5 caracteres");
             validationPass = false;
+        }
+        else{
+            input_layout_password.setErrorEnabled(false);
         }
 
 
@@ -352,9 +367,15 @@ public class fragmentDistribteur extends Fragment {
             input_layout_voie.setError("Ce champ ne doit pas etre vide");
             validationPass = false;
         }
+        else{
+            input_layout_voie.setErrorEnabled(false);
+        }
         if (input_ville.getText().toString().trim().isEmpty()) {
             input_layout_ville.setError("Ce champ ne doit pas etre vide");
             validationPass = false;
+        }
+        else{
+            input_layout_ville.setErrorEnabled(false);
         }
 
 
@@ -362,6 +383,9 @@ public class fragmentDistribteur extends Fragment {
         if(input_zip.getText().toString().trim().isEmpty() || input_zip.getText().length()!=5){
             input_layout_zip.setError("Zip code invalide");
             validationPass = false;
+        }
+        else{
+            input_layout_zip.setErrorEnabled(false);
         }
         //return validationPass;
         return true;

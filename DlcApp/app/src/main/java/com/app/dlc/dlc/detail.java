@@ -2,6 +2,8 @@ package com.app.dlc.dlc;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -70,6 +72,9 @@ public class detail extends AppCompatActivity {
 
 
         setSupportActionBar(toolbar);
+        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        upArrow.setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

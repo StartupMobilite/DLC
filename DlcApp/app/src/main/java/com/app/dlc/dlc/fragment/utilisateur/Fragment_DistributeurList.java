@@ -168,6 +168,9 @@ public class Fragment_DistributeurList extends Fragment implements SearchView.On
                 if (null == distributeurList) {
                     distributeurList = new ArrayList<Distributeur>();
                 }
+                else{
+                    distributeurList.clear();
+                }
 
                 for(int i =0;i<response.length();i++)
                 {

@@ -1,11 +1,13 @@
 package com.app.dlc.dlc.activity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -91,6 +95,41 @@ public class home extends AppCompatActivity {
 
         //reference du navigation view
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
+
+        View header = nvDrawer.getHeaderView(0);
+        TextView email = (TextView) header.findViewById(R.id.navigation_drawer_account_information_email);
+        ImageView iv_exit = (ImageView) header.findViewById(R.id.iv_exit);
+        //email.setText(getIntent().getExtras().getString("email"));
+        email.setText(LoggedInUser.getEmail());
+
+        iv_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(home.this);
+                alertDialogBuilder.setMessage("Voulez-vous vraiment vous deconnecter ?");
+
+                alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        //Toast.makeText(home.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), login.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                });
+
+                alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                        finish();
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+            }
+        });
 
         // Setup drawer view
         if(LoggedInUser.type.equals("utilisateur")){
@@ -189,11 +228,11 @@ public class home extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
         if(id == R.id.action_search){
-            Toast.makeText(getApplicationContext(), "Search action is selected!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Search action is selected!", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -314,6 +353,29 @@ public class home extends AppCompatActivity {
                 break;
 
             case R.id.nav_deconnexion:
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setMessage("Voulez-vous vraiment vous deconnecter ?");
+
+                alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        //Toast.makeText(home.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), login.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                });
+
+                alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //finish();
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+                isFragment=false;
 
                 fragmentClass = Fragment_Preference.class;
 
@@ -346,6 +408,30 @@ public class home extends AppCompatActivity {
                 break;
 
             case R.id.nav_me_deconnecter:
+
+                AlertDialog.Builder alertDialogBuilder_ = new AlertDialog.Builder(this);
+                alertDialogBuilder_.setMessage("Voulez-vous vraiment vous deconnecter ?");
+
+                alertDialogBuilder_.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        //Toast.makeText(home.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), login.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                });
+
+                alertDialogBuilder_.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //finish();
+                    }
+                });
+
+                AlertDialog alertDialog_ = alertDialogBuilder_.create();
+                alertDialog_.show();
+                isFragment=false;
 
                 fragmentClass = Fragment_Preference.class;
 

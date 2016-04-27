@@ -1,11 +1,11 @@
-<android.support.percent.PercentRelativeLayout android:id="@+id/navigation_drawer_account_view"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_drawer_account_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:clickable="true"
-    android:foreground="?selectableItemBackground"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:foreground="?selectableItemBackground">
 
     <FrameLayout
         android:foreground="@color/black_alpha_50"
@@ -40,19 +40,31 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/navigation_drawer_account_information_display_name"
-                style="@style/Body2.White.Primary"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Test" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/navigation_drawer_account_information_email"
-                style="@style/Body1.White.Primary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="test@gmail.com" />
+                <TextView
+                    android:id="@+id/navigation_drawer_account_information_email"
+                    style="@style/Body1.White.Primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentStart="true"
+                    android:text="test@gmail.com" />
+
+                <ImageView
+                    android:id="@+id/iv_exit"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignBaseline="@+id/navigation_drawer_account_information_email"
+                    android:layout_marginTop="40dp"
+                    android:baselineAlignBottom="true"
+                    android:src="@drawable/ic_exit_to_app_white_24dp" />
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 

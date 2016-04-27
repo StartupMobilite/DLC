@@ -170,6 +170,7 @@ public class login extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), home.class);
                 // supprimer l activite du backstack pour eviter un retour vers la page de login
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("email", "xyz@yahoo.fr");
                 startActivityForResult(intent, 0); // execution de l intent
             }
             else if(responseCode.equals("401")) //si l authentification echoue
@@ -188,12 +189,12 @@ public class login extends AppCompatActivity {
                 // donnees en dur pour eviter de retaper les credentials a chaque test
 
                 //Credential User
-                /*credentials.put("email", "guillaumeyvo@yahoo.fr");
-                credentials.put("password", "1234");*/
+                credentials.put("email", "guillaumeyvo@yahoo.fr");
+                credentials.put("password", "1234");
 
                 //Credential Distributeur
-             credentials.put("email", "lidl@wyz.fr");
-             credentials.put("password", "12345");
+             /*credentials.put("email", "lidl@wyz.fr");
+             credentials.put("password", "12345");*/
 //
                 //A decommenter pour la version finale
                 /*=======================================*/
@@ -240,6 +241,7 @@ public class login extends AppCompatActivity {
                     // le type sera utlise plus tard en vu de definit les prochaines actions a executer en fonction du type de
                     // l utlisateur authentife
                     LoggedInUser.type = "utilisateur";
+                    LoggedInUser.setEmail("xyz@yahoo.fr");
                 }
                 else //en cas d echec on teste si c est un distributeur en se basant sur le meme principe
                 {
@@ -270,6 +272,7 @@ public class login extends AppCompatActivity {
                         }
                         parseResult(jsonResponse.toString());
                         LoggedInUser.type = "distributeur";
+                        LoggedInUser.setEmail("xyz@yahoo.fr");
 
                         URL req = new URL("https://dlcapi.herokuapp.com/api/Distributeurs?filter[where][id]="+LoggedInUser.getId()+"&access_token="+LoggedInUser.getToken());
                         HttpURLConnection reqconnection=null;

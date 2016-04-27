@@ -7,12 +7,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -71,6 +74,8 @@ public class Fragment_MesProduits extends Fragment implements SearchView.OnQuery
     TextView tv;
     ArrayAdapter<String> dataAdapter;
     Hashtable categorieTable;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
     //FloatingActionButton fab;
 
 
@@ -103,6 +108,8 @@ public class Fragment_MesProduits extends Fragment implements SearchView.OnQuery
         tv = (TextView) rootView.findViewById(R.id.tv);
         registerForContextMenu(rootView);
         //spinner.setOnItemSelectedListener(this);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+
 
         // Spinner Drop down elements
 
@@ -175,6 +182,21 @@ public class Fragment_MesProduits extends Fragment implements SearchView.OnQuery
         });
 
         url = "https://dlcapi.herokuapp.com/api/Produits?filter[where][iddistributeur]="+LoggedInUser.getId();
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //new AsyncHttpTask().execute(url);
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 1100);
+                //new AsyncHttpTask().execute(url);
+                //mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
         new AsyncHttpTask().execute(url);
         return rootView;
     }
@@ -605,6 +627,8 @@ public class Fragment_MesProduits extends Fragment implements SearchView.OnQuery
             this.tv_nom = (TextView) itemView.findViewById(R.id.tv_nom);
             this.tv_prixfinal = (TextView) itemView.findViewById(R.id.tv_prixfinal);
             this.tv_prixinitial = (TextView) itemView.findViewById(R.id.tv_prixinitial);
+            tv_prixinitial.setPaintFlags(tv_prixinitial.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
             this.tv_quantite = (TextView) itemView.findViewById(R.id.tv_quantite);
             this.tv_dlc = (TextView) itemView.findViewById(R.id.tv_dlc);
             this.tv_categorie = (TextView) itemView.findViewById(R.id.tv_categorie);
@@ -640,7 +664,7 @@ public class Fragment_MesProduits extends Fragment implements SearchView.OnQuery
                                     startActivity(intent);
                                     return true;
                                 case R.id.item_supprimer:
-                                    Toast.makeText(itemView.getContext(), "id ="+tv_id.getText(), Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(itemView.getContext(), "id ="+tv_id.getText(), Toast.LENGTH_SHORT).show();
                                     deleteProduct(tv_id.getText().toString());
                                     DeleteAsyncTask d = new DeleteAsyncTask();
                                     d.execute(tv_id.getText().toString());

@@ -1,12 +1,15 @@
 package com.app.dlc.dlc;
 
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
@@ -16,6 +19,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -23,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.app.dlc.dlc.activity.home;
@@ -50,6 +55,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.Locale;
 
 public class preferences extends AppCompatActivity {
     private ProgressDialog dialog;
@@ -58,6 +64,9 @@ public class preferences extends AppCompatActivity {
     EditText input_nom,input_voie,input_ville,input_zip,tv_horaireFermerture,tv_horaireOuverture;
     private static int RESULT_LOAD_IMG = 1;
     String imgDecodableString;
+    Calendar myCalendar;
+    TimePickerDialog.OnTimeSetListener timeOuverture;
+    TimePickerDialog.OnTimeSetListener timeFermerture;
 
 
 
@@ -71,6 +80,9 @@ public class preferences extends AppCompatActivity {
         dialog.setMessage("Loading. Please wait...");
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        upArrow.setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
@@ -87,6 +99,8 @@ public class preferences extends AppCompatActivity {
         input_zip=(EditText)findViewById(R.id.input_zip);
         tv_horaireFermerture=(EditText)findViewById(R.id.tv_horaireFermerture);
         tv_horaireOuverture=(EditText)findViewById(R.id.tv_horaireOuverture);
+        tv_horaireOuverture.setInputType(InputType.TYPE_NULL);
+        tv_horaireFermerture.setInputType(InputType.TYPE_NULL);
 
         backdrop=(ImageView) findViewById(R.id.backdrop);
         input_nom.setText(getIntent().getExtras().getString("Nom"));
@@ -97,6 +111,42 @@ public class preferences extends AppCompatActivity {
         tv_horaireFermerture.setText(getIntent().getExtras().getString("horaireFermerture"));
         byte[] imageAsBytes = getIntent().getExtras().getByteArray("Image");
         backdrop.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
+
+        myCalendar = Calendar.getInstance();
+
+        timeOuverture=new TimePickerDialog.OnTimeSetListener() {
+            public void onTimeSet(TimePicker view, int hourOfDay,
+                                  int minute) {
+                myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                myCalendar.set(Calendar.MINUTE, minute);
+                updateLabelOuverture();
+            }
+        };
+
+        timeFermerture=new TimePickerDialog.OnTimeSetListener() {
+            public void onTimeSet(TimePicker view, int hourOfDay,
+                                  int minute) {
+                myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                myCalendar.set(Calendar.MINUTE, minute);
+                updateLabelFermerture();
+            }
+        };
+
+
+
+        tv_horaireOuverture.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new TimePickerDialog(preferences.this,timeOuverture,myCalendar.get(Calendar.HOUR_OF_DAY),myCalendar.get(Calendar.MINUTE),true).show();
+            }
+        });
+
+        tv_horaireFermerture.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new TimePickerDialog(preferences.this,timeFermerture,myCalendar.get(Calendar.HOUR_OF_DAY),myCalendar.get(Calendar.MINUTE),true).show();
+            }
+        });
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +164,19 @@ public class preferences extends AppCompatActivity {
 
 
 
+    }
+    private void updateLabelOuverture() {
+        String myFormat = "HH:mm";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        //tv_horaireOuverture.setText(fmtDateAndTime.format(myCalendar.getTime()));
+        tv_horaireOuverture.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    private void updateLabelFermerture() {
+        String myFormat = "HH:mm";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        //tv_horaireOuverture.setText(fmtDateAndTime.format(myCalendar.getTime()));
+        tv_horaireFermerture.setText(sdf.format(myCalendar.getTime()));
     }
 
     @Override

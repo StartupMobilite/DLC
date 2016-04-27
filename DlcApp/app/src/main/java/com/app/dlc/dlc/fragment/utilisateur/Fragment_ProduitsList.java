@@ -1,11 +1,14 @@
 package com.app.dlc.dlc.fragment.utilisateur;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,6 +17,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -59,6 +64,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
+import android.os.Handler;
 
 /**
  * Created by Guillaume on 31/03/2016.
@@ -77,6 +83,8 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
     ArrayAdapter<String> dataAdapter;
     FloatingActionButton fab;
     Hashtable categorieTable;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    List<String> checkedCategorie = new ArrayList<String>();
 
 
     public Fragment_ProduitsList() {
@@ -100,9 +108,10 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
         dialog.setMessage("Loading. Please wait...");
-        String url;
+        final String url;
         spinner = (Spinner) rootView.findViewById(R.id.spinner);
         tv = (TextView) rootView.findViewById(R.id.tv);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
         registerForContextMenu(rootView);
         //spinner.setOnItemSelectedListener(this);
 
@@ -172,6 +181,21 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
             }
         });*/
 
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //new AsyncHttpTask().execute(url);
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 1100);
+                //new AsyncHttpTask().execute(url);
+                //mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
         new AsyncHttpTask().execute(url);
         return rootView;
     }
@@ -184,6 +208,18 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
             }
         }
         return filteredList;
+    }
+
+    private  List<Produit> filterRecycleViewByCategory(List<Produit> produitList, ArrayList categorie) {
+        List<Produit> filteredList = new ArrayList<Produit>();
+
+        for (Produit produit : produitList) {
+            if (categorie.contains(produit.getCategorie())) {
+                filteredList.add(produit);
+            }
+        }
+        return filteredList;
+
     }
 
 
@@ -235,6 +271,67 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
                         return true; // Return true to expand action view
                     }
                 });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        /*if(id == R.id.action_filter){
+            //Do whatever you want to do
+            Dialog dialog;
+            final String[] items = {" PHP", " JAVA", " JSON", " C#", " Objective-C"};
+            //List<String> itemsSelected = new ArrayList();
+            checkedCategorie = new ArrayList<String>(categories);
+            final ArrayList itemsSelected = new ArrayList();
+            final ArrayList itemUnchecked = new ArrayList();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Select Languages you know : ");
+            String[] cat = new String[categories.size()];
+            cat = categories.toArray(cat);
+
+            int L = cat.length;
+            boolean[] b2 = new boolean[L];
+            for(int i=0 ; i<L ; i++){
+                b2[i]=true;
+            }
+            builder.setMultiChoiceItems(cat, b2,
+                    new DialogInterface.OnMultiChoiceClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int selectedItemId,
+                                            boolean isSelected) {
+                            if (isSelected) {
+                                itemsSelected.add(selectedItemId);
+                            } else if (itemsSelected.contains(selectedItemId)) {
+                                itemsSelected.remove(Integer.valueOf(selectedItemId));
+                            }
+                            else if(!isSelected){
+                                //itemUnchecked.add(cat[selectedItemId]);
+                                String s =categories.get(selectedItemId);
+                                itemUnchecked.add(s);
+                                checkedCategorie.remove(s);
+                            }
+                        }
+                    })
+                    .setPositiveButton("Done!", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            //Your logic when OK button is clicked
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+            dialog = builder.create();
+            dialog.show();
+
+
+
+            return true;
+        }*/
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -343,7 +440,13 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
             /* Download complete. Lets update UI */
             if (result == 1) {
                 adapter = new ProduitRecycleViewAdapter(getActivity(), produitList);
+                mRecyclerView.removeAllViews();
+                adapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(adapter);
+
+
+                //mRecyclerView.notify();
+
                 spinner.setAdapter(dataAdapter);
                 tv.setVisibility(View.VISIBLE);
                 spinner.setVisibility(View.VISIBLE);
@@ -408,6 +511,8 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
     }
 
 
+
+
     public class ProduitRecycleViewAdapter extends RecyclerView.Adapter<ProduitRowTemplate> {
         private List<Produit> produitList;
         //private OnItemClickListener listener;
@@ -424,7 +529,8 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
         @Override
         public ProduitRowTemplate onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.produitrowtemplate, null);
+            //View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.produitrowtemplate, null);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.prouit_row_template, null);
             cardView = (CardView) parent.findViewById(R.id.card_view);
             final TextView t = (TextView) parent.findViewById(R.id.tv_nom);
             ProduitRowTemplate produitRowTemplate = new ProduitRowTemplate(v);
@@ -491,6 +597,7 @@ public class Fragment_ProduitsList extends Fragment implements SearchView.OnQuer
             this.tv_nom = (TextView) itemView.findViewById(R.id.tv_nom);
             this.tv_prixfinal = (TextView) itemView.findViewById(R.id.tv_prixfinal);
             this.tv_prixinitial = (TextView) itemView.findViewById(R.id.tv_prixinitial);
+            tv_prixinitial.setPaintFlags(tv_prixinitial.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             this.tv_quantite = (TextView) itemView.findViewById(R.id.tv_quantite);
             this.tv_dlc = (TextView) itemView.findViewById(R.id.tv_dlc);
             this.tv_categorie = (TextView) itemView.findViewById(R.id.tv_categorie);
