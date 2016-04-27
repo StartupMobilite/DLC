@@ -189,8 +189,8 @@ public class login extends AppCompatActivity {
                 // donnees en dur pour eviter de retaper les credentials a chaque test
 
                 //Credential User
-                credentials.put("email", "guillaumeyvo@yahoo.fr");
-                credentials.put("password", "1234");
+//                /*credentials.put("email", "guillaumeyvo@yahoo.fr");
+//                credentials.put("password", "1234");*/
 
                 //Credential Distributeur
              /*credentials.put("email", "lidl@wyz.fr");
@@ -198,8 +198,8 @@ public class login extends AppCompatActivity {
 //
                 //A decommenter pour la version finale
                 /*=======================================*/
-                //credentials.put("email", email);
-                //credentials.put("password", password);
+                credentials.put("email", email);
+                credentials.put("password", password);
                 /*=======================================*/
             } catch (JSONException e) {
                 // TODO Auto-generated catch block
